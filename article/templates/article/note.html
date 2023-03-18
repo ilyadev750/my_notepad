@@ -8,7 +8,8 @@
   src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"
 ></script>
 
-<hr />
-
 <form method="post">{% csrf_token %} {{ form.media }} {{ form.as_p }}</form>
-<button>Save changes</button>
+<input type="submit" value="Save" />
+
+Цели: как преобразовать форму в ПДФ и сохранить под учеткой, доработать дизайн
+Идея: преобразовать форму с текстом в разные форматы: txt, doc и pdf
