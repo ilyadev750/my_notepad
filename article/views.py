@@ -23,14 +23,17 @@ def index(request, *args, **kwargs):
 def note(request, *args, **kwargs):
     article = Article.objects.get(id=1)
     if request.method == 'POST':
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST or None, instance=article)
         if form.is_valid():
-            form.save(commit=False)
-            form = ArticleForm(title=form.title, content=form.content)
+            title = form.cleaned_data['title']
+            content = form.cleaned_data['content']
+            form = Article.objects.create(title=title, content=content)
+            form.save()
             # pdf = html_to_pdf('note.html', {'article': article, 'form': form})
             # return HttpResponse(pdf, content_type='application/pdf')
         
     else:
         form = ArticleForm(instance=article)
+    context = {'form': form}
 
-    return render(request, 'article/note.html', {'form': form})
+    return render(request, 'article/note.html', context)
