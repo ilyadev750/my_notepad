@@ -16,8 +16,7 @@ def note(request, *args, **kwargs):
             content = form.cleaned_data['content']
             date = form.cleaned_data['date']
             form.save()
-
     else:
-        context = {}
-
+        form = NoteForm(instance=note)
+    context = {}
     return render(request, 'note/editor.html', context)

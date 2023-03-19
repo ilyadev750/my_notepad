@@ -10,4 +10,6 @@ class NoteForm(forms.Form):
     }))
     class Meta:
         model = Note
-        fields = '__all__'
+        fields = ['title', 'content', 'create', 'update']
+        # widgets = {'create': forms.HiddenInput,
+        #            'update': forms.HiddenInput,}
