@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse
+from django.utils import timezone
 from .models import Note
 from .forms import NoteForm
 
@@ -8,15 +9,19 @@ def start(request,*args, **kwargs):
     return render(request, 'note/first.html', context)
 
 def note(request, *args, **kwargs):
-    note = Note.objects.get(id=1)
+    data = {'title': '', 
+            'content': '', 
+            'create': timezone.now(), 
+            'update': timezone.now()}
+    form = NoteForm(data)
     if request.method == 'POST':
-        form = NoteForm(request.POST or None, instance=note)
+        form = NoteForm(request.POST)
         if form.is_valid():
-            title = form.cleaned_data['title']
-            content = form.cleaned_data['content']
-            date = form.cleaned_data['date']
-            form.save()
-    else:
-        form = NoteForm(instance=note)
-    context = {}
+            obj = Note()
+            obj.title = form.cleaned_data['title']
+            obj.content = form.cleaned_data['content']
+            obj.create = form.cleaned_data['create']
+            obj.update = form.cleaned_data['update']
+            obj.save()
+    context = {'form': form}
     return render(request, 'note/editor.html', context)
