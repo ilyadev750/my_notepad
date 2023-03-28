@@ -9,5 +9,7 @@ from note.views import note, start
 urlpatterns = [
     path('', start, name='start'),
     path('admin/', admin.site.urls),
-    path('note/', note, name='note')
+    path('note/', note, name='note'),
+    path('users/', include('django.contrib.auth.urls')),
+    path('users/', include('users.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -25,3 +25,5 @@ def note(request, *args, **kwargs):
             obj.save()
     context = {'form': form}
     return render(request, 'note/editor.html', context)
+
+# реализовать создание юзеров, дать им разрешения, foreigh key изучить
