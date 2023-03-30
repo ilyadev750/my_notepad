@@ -7,7 +7,7 @@ from note.views import note, start
 
 
 urlpatterns = [
-    path('', start, name='start'),
+    path('', note, name='note'),
     path('admin/', admin.site.urls),
     path('note/', note, name='note'),
     path('users/', include('django.contrib.auth.urls')),

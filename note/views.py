@@ -6,7 +6,7 @@ from .forms import NoteForm
 # Create your views here.
 def start(request,*args, **kwargs):
     context = {}
-    return render(request, 'note/first.html', context)
+    return render(request, 'note/editor.html', context)
 
 def note(request, *args, **kwargs):
     data = {'title': '', 

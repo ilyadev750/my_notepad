@@ -13,9 +13,7 @@ def login_user(request):
             # Redirect to a success page.
             return redirect('/note/')
         else:
-            # messages.success(request, ("There was an error, try again ..."))
+            messages.success(request, ("There was an error, try again ..."))
             return redirect('login')
-            # Return an 'invalid login' error message.
-            ...
     return render(request, 'authenticate/login.html', {})
 
