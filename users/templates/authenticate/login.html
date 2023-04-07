@@ -48,7 +48,6 @@
     <center><h1>User Login Form</h1></center>
     <form action="" method="post" enctype="multipart/form-data">
       {% csrf_token %} {{ form.as_p }}
-      <input type="hidden" name="next" value="{{ request.path }}" />
       <div class="container">
         {% for message in messages %} {% if message %} {{ message }} {% endif %}
         {% endfor %}
@@ -74,6 +73,6 @@
         Forgot <a href="#"> password? </a>
       </div>
     </form>
-    {{ request.path }}
+    <a href="users/login_user/" class="btn btn-primary">Regist</a>
   </body>
 </html>

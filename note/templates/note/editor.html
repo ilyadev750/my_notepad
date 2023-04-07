@@ -53,7 +53,6 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-  
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
@@ -65,10 +64,7 @@
             <li class="nav-item">
               <a class="nav-link" href="#">FAQ</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/users/login_user">Register/login</a>
-              <input type="hidden" name="next" value="{{ request.path }}" />
-            </li>
+
             <li class="nav-item">
               <a class="nav-link" href="#">Logout</a>
             </li>
@@ -111,8 +107,10 @@
     <div class="col-sm-12">
       <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %} {{ form.as_p }}
-        <input type="hidden" name="next" value="{{ request.path }}" />
         <input type="submit" value="Save" />
+        <!-- <input type="submit" value="Register/login" /> -->
+        <input type="submit" value="Register/login" />
+        <!-- <button type="submit" formaction="/users/login_user">Register/login</button> -->
         <a href="https://google.com" class="btn btn-primary">Download</a>
       </form>
     </div>

@@ -15,3 +15,7 @@ class NoteForm(forms.Form):
     create = forms.DateTimeField(widget=forms.HiddenInput())
     update = forms.DateTimeField(widget=forms.HiddenInput())
 
+class UserForm(forms.Form):
+    username = forms.CharField(max_length=255)
+    password = forms.CharField(max_length=255)
+
