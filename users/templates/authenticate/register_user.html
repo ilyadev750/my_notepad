@@ -106,13 +106,10 @@
         </div>
       </div>
     <div class="col-sm-12">
-      <form action="" method="post" enctype="multipart/form-data">
+      <form action="{% url 'register_user' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %} {{ form.as_p }}
-        <input type="submit" value="Save" />
-        <!-- <input type="submit" value="Register/login" /> -->
-        <input type="submit" value="Register/login" />
-        <!-- <button type="submit" formaction="/users/login_user">Register/login</button> -->
-        <a href="https://google.com" class="btn btn-primary">Download</a>
+        <br/><br/>
+        <input type="submit" value="Register" />
       </form>
     </div>
   </body>
