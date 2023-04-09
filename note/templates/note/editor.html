@@ -108,11 +108,13 @@
     <div class="col-sm-12">
       <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %} {{ form.as_p }}
-        <input type="submit" value="Save" />
-        <!-- <input type="submit" value="Register/login" /> -->
-        <input type="submit" value="Register/login" />
-        <!-- <button type="submit" formaction="/users/login_user">Register/login</button> -->
-        <a href="https://google.com" class="btn btn-primary">Download</a>
+        {% if user.is_authenticated %}
+          <input type="submit" value="Save" />
+          <input type="submit" value="Logout" />
+        {% else %}
+          <input type="submit" value="Register/login" />
+        {% endif %}
+        <input type="submit" value="Download" />
       </form>
     </div>
   </body>

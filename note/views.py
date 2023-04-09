@@ -1,38 +1,31 @@
 from django.shortcuts import render, HttpResponse
 from django.utils import timezone
 from django.template.loader import render_to_string
+from .functions import prepare_data_for_form, add_info_in_object
 from .models import Note
 from .forms import NoteForm
 
 # Create your views here.
 def start(request,*args, **kwargs):
-    context = {'cookies': request.COOKIES }
+    context = {}
     return render(request, 'note/first.html', context)
 
 def note(request, *args, **kwargs):
-    try:
-        data = {'title': request.session['title'], 
-                'content': request.session['content'], 
-                'create': timezone.now(), 
-                'update': timezone.now()}   
-    except:
-        data = {'title': '', 
-                'content': '', 
-                'create': timezone.now(), 
-                'update': timezone.now()}
+    data = prepare_data_for_form(request)
     form = NoteForm(data)
     if request.method == 'POST':
         form = NoteForm(request.POST)
         if form.is_valid():
-            obj = Note()
-            obj.title = form.cleaned_data['title']
-            obj.content = form.cleaned_data['content']
-            obj.create = form.cleaned_data['create']
-            obj.update = form.cleaned_data['update']
-            request.session['title'] = obj.title
-            request.session['content'] = obj.content
+            empty_obj = Note()
+            filled_odj = add_info_in_object(empty_obj, form)
+            # obj.title = form.cleaned_data['title']
+            # obj.content = form.cleaned_data['content']
+            # obj.create = form.cleaned_data['create']
+            # obj.update = form.cleaned_data['update']
+            request.session['title'] = filled_odj.title
+            request.session['content'] = filled_odj.content
             if request.user.is_authenticated:
-                obj.save()
+                filled_odj.save()
             else:
                 rendered = render_to_string('authenticate/login.html', {})
                 return HttpResponse(rendered)
