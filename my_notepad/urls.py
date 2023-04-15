@@ -9,9 +9,9 @@ from django.views.decorators.cache import cache_page
 
 urlpatterns = [
     path('', start, name='start'),
-    path('home/', note, name='note'),
+    path('base/', note, name='note'),
     # add url for each user
     path('admin/', admin.site.urls),
-    path('home/users/', include('django.contrib.auth.urls')),
-    path('home/users/', include('users.urls')),
+    path('base/users/', include('django.contrib.auth.urls')),
+    path('base/users/', include('users.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
