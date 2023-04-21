@@ -1,4 +1,5 @@
 from django.db import models
+from users.models import User
 from datetime import datetime
 from django.utils import timezone
 
@@ -8,3 +9,4 @@ class Note(models.Model):
     content = models.TextField(blank=True, null=True)
     create = models.DateTimeField(default=timezone.now(), blank=True, null=True)
     update = models.DateTimeField(default=timezone.now(), blank=True, null=True)
+    username = models.TextField(blank=True)
