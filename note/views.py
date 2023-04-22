@@ -1,10 +1,29 @@
-from django.shortcuts import render, HttpResponse
-from django.utils import timezone
-from django.template.loader import render_to_string
+
+import os
+from django.conf import settings
+from django.http import HttpResponse
+from django.shortcuts import render
+from django.views.generic import View
+# from django.utils import timezone
+from django.template.loader import get_template
+from .functions import render_to_pdf
 from django.core.files import File
+from django.core.files.storage import FileSystemStorage
 from .functions import prepare_data_for_form, add_info_in_object_and_session
 from .models import Note
 from .forms import NoteForm
+
+
+# fs = FileSystemStorage(location='/home/ilya')
+
+class GeneratePdf(View):
+     def get(self, request, *args, **kwargs):
+        
+        #getting the template
+        pdf = render_to_pdf('user_note.html', content={'form': form})
+         
+         #rendering the template
+        return HttpResponse(pdf, content_type='application/pdf')
 
 # Create your views here.
 def start(request, *args, **kwargs):
@@ -19,7 +38,10 @@ def note(request, *args, **kwargs):
         if form.is_valid():
             empty_obj = Note()
             filled_odj, request = add_info_in_object_and_session(empty_obj, form, request)
-            user_actions_handler(request, filled_odj)
+            # user_actions_handler(request, filled_odj)
+            if 'download' in request.POST:
+                pdf = render_to_pdf('user_note.html', content={'object': filled_odj})
+                return HttpResponse(pdf, content_type='application/pdf')
             # if 'save' in request.POST:
             #     filled_odj.username = request.user.username
             #     filled_odj.save()
@@ -39,8 +61,9 @@ def user_actions_handler(request, object):
         object.username = request.user.username
         object.save()
     elif 'download' in request.POST:
-        f = open('hh.txt', 'w')
-        myfile = File(f)
+        pdf = render_to_pdf('user_note.html', content={'object': object})
+        return HttpResponse(pdf, content_type='application/pdf')
+        
 # сделать рефакторинг кода и прогуглить скачивание файлов
 
 

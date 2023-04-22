@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib.auth.forms import UserCreationForm
-from .models import User
+
 
 def register_user(request):
     if request.method == "POST":
@@ -20,12 +20,6 @@ def register_user(request):
         form = UserCreationForm()
     return render(request, 'authenticate/register_user.html', {'form': form})
 
-def create_user(User, username):
-    try:
-        User.objects.get(username=username)
-    except User.DoesNotExist as exc:
-        User.objects.create(username=username)
-
 def login_user(request):
     if request.method == "POST":
         try:
@@ -36,11 +30,6 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            create_user(User, username)
-            # try:
-            #     User.objects.get(username=username)
-            # except User.DoesNotExist as exc:
-            #     User.objects.create(username=username)
             return redirect('/base/')
         else:
             messages.success(request, ("There was an error, try again ..."))
