@@ -3,7 +3,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from note.views import anonymous_note, start, user_note
+from note.views import anonymous_note, start, new_user_note
 from django.views.decorators.cache import cache_page
 
 

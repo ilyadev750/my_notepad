@@ -1,1 +1,5 @@
-{% for obj in user_objects %} {{obj.id}} {% endfor %}
+{% for obj in user_objects %}
+<a href="{{obj.title}}/">{{obj.title}}</a>
+{{obj.create}} {{obj.update}}
+<br />
+{% endfor %}

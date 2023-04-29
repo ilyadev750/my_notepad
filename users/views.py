@@ -15,7 +15,7 @@ def register_user(request):
             user = authenticate(username=username, password=password)
             login(request, user)
             messages.success(request, ('Registration successful'))
-            return redirect('/base/')
+            return redirect('user_note')
     else:
         form = UserCreationForm()
     return render(request, 'authenticate/register_user.html', {'form': form})
@@ -31,7 +31,6 @@ def login_user(request):
         if user is not None:
             login(request, user)
             return redirect('user_note')
-            # return redirect('/base/users/test/')
         else:
             messages.success(request, ("There was an error, try again ..."))
             return redirect('login')

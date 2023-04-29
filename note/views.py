@@ -14,6 +14,7 @@ def start(request, *args, **kwargs):
     return render(request, 'note/first.html', context)
 
 def anonymous_note(request, *args, **kwargs):
+    print(request.path)
     data = prepare_data_for_form(request)
     form = AnonymousNoteForm(data)
     if request.method == 'POST':
@@ -34,7 +35,7 @@ def get_user_notes(request, *args, **kwargs):
         context = {'user_objects': user_objects}
         return render(request, 'note/all_user_notes.html', context) 
 
-def user_note(request, *args, **kwargs):
+def new_user_note(request, *args, **kwargs):
     if request.user.is_authenticated:
         data = prepare_data_for_form(request)
         form = UserCreateNoteForm(data)
@@ -63,6 +64,9 @@ def user_note(request, *args, **kwargs):
                     return render(request, 'note/first.html', {})
         context = {'form': form }
         return render(request, 'note/editor.html', context)    
+    
+def update_user_note(request, *args, **kwargs):
+    pass
 
 
 
