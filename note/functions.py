@@ -14,6 +14,15 @@ def prepare_data_for_form(request):
             'username': 'anonymous'}
     return data
 
+def extract_data_from_object(obj):
+    title = obj.title
+    content = obj.content
+    update = timezone.now()
+    data = {'title': title,
+            'content': content,
+            'update': update}
+    return data
+
 def extract_data_from_session(request, key):
     try:
         value = request.session[key]
@@ -36,12 +45,20 @@ def add_info_in_session(form, request):
         request.session['content'] = content
     return request
 
-def add_info_in_object_and_session(obj, form, request):
+def add_info_in_new_object_and_session(obj, form, request):
     obj.title = form.cleaned_data['title']
     obj.content = form.cleaned_data['content']
     obj.create = form.cleaned_data['create']
     obj.update = form.cleaned_data['update']
     obj.username = request.user.username
+    request.session['title'] = obj.title
+    request.session['content'] = obj.content
+    return obj, request
+
+def add_info_in_current_object_and_session(obj, form, request):
+    obj.title = form.cleaned_data['title']
+    obj.content = form.cleaned_data['content']
+    obj.update = form.cleaned_data['update']
     request.session['title'] = obj.title
     request.session['content'] = obj.content
     return obj, request
