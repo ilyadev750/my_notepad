@@ -3,4 +3,5 @@
 {{obj.create}} {{obj.update}}
 <br />
 {% endfor %}
-<a href="http://127.0.0.1:8000/base/users/">Create new note</a>
+
+<a href="{% url 'new_user_note' item='new' %}">Create new note</a>

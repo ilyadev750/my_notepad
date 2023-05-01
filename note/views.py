@@ -1,13 +1,13 @@
 
 import os
-from django.conf import settings
-from django.http import HttpResponse
+from django.urls import reverse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .functions import render_to_pdf
 from .functions import prepare_data_for_form, add_info_in_new_object_and_session, add_info_in_session, \
     extract_data_from_object, add_info_in_current_object_and_session
-from .models import Note
 from .forms import AnonymousNoteForm, UserCreateNoteForm, UserUpdateNoteForm
+from .models import Note
 
 # Create your views here.
 def start(request, *args, **kwargs):
@@ -37,7 +37,11 @@ def get_user_notes(request, *args, **kwargs):
         return render(request, 'note/all_user_notes.html', context) 
 
 def new_user_note(request, *args, **kwargs):
+    if kwargs['item'] == 'new':
+        request.session['title'] = ''
+        request.session['content'] = ''
     if request.user.is_authenticated:
+        print(request.session.keys())
         data = prepare_data_for_form(request)
         form = UserCreateNoteForm(data)
         if request.method == 'POST':
@@ -47,7 +51,8 @@ def new_user_note(request, *args, **kwargs):
                 filled_obj, request = add_info_in_new_object_and_session(empty_obj, form, request)
 
                 if 'save' in request.POST:
-                    filled_obj.save()
+                    print('SUKA BLYAT')
+                    # filled_obj.save()
                     user_id = request.user.id
                     path = f'id{user_id}/'
                     return redirect(path)
@@ -68,7 +73,9 @@ def update_user_note(request, *args, **kwargs):
     if request.user.is_authenticated:
         title = request.path.split('/')
         title = title[-2]
-        current_user_object = Note.objects.get(username=request.user.username, title=title)
+        current_user_object = Note.objects.filter(username=request.user.username, title=title)
+        if current_user_object:
+            current_user_object = current_user_object[0]
         data = extract_data_from_object(current_user_object)
         form = UserUpdateNoteForm(data)
         if request.method == 'POST':
@@ -80,8 +87,8 @@ def update_user_note(request, *args, **kwargs):
             if 'save' in request.POST:
                 current_user_object.save()
                 user_id = request.user.id
-                path = f"http://127.0.0.1:8000/base/users/id{user_id}/"
-                return redirect(path)
+                # path = f"http://127.0.0.1:8000/base/users/id{user_id}/"
+                return redirect('back', (), {})
             
             elif 'download' in request.POST:
                 context = {'title': request.session['title'], 'content': request.session['content']}
