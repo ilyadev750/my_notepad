@@ -1,7 +1,7 @@
 
 import os
 from django.urls import reverse
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .functions import render_to_pdf
 from .functions import prepare_data_for_form, add_info_in_new_object_and_session, add_info_in_session, \
@@ -33,15 +33,15 @@ def anonymous_note(request, *args, **kwargs):
 def get_user_notes(request, *args, **kwargs):
     if request.user.is_authenticated:
         user_objects = Note.objects.filter(username=request.user.username)
-        context = {'user_objects': user_objects}
+        context = {'user_objects': user_objects, 'user_id': request.user.id}
         return render(request, 'note/all_user_notes.html', context) 
 
 def new_user_note(request, *args, **kwargs):
-    if kwargs['item'] == 'new':
+    print(kwargs)
+    if kwargs['type_of_note'] == 'new':
         request.session['title'] = ''
         request.session['content'] = ''
     if request.user.is_authenticated:
-        print(request.session.keys())
         data = prepare_data_for_form(request)
         form = UserCreateNoteForm(data)
         if request.method == 'POST':
@@ -51,12 +51,8 @@ def new_user_note(request, *args, **kwargs):
                 filled_obj, request = add_info_in_new_object_and_session(empty_obj, form, request)
 
                 if 'save' in request.POST:
-                    print('SUKA BLYAT')
-                    # filled_obj.save()
-                    user_id = request.user.id
-                    path = f'id{user_id}/'
-                    return redirect(path)
-
+                    filled_obj.save()
+                    return redirect('get_user_notes', request.user.id)
 
                 elif 'download' in request.POST:
                     context = {'title': request.session['title'], 'content': request.session['content']}
@@ -66,7 +62,7 @@ def new_user_note(request, *args, **kwargs):
 
                 elif 'logout' in request.POST:
                     return render(request, 'note/first.html', {})
-        context = {'form': form }
+        context = {'form': form, 'fields': ['title', 'content'] }
         return render(request, 'note/editor.html', context)    
     
 def update_user_note(request, *args, **kwargs):

@@ -12,5 +12,5 @@ urlpatterns = [
     path('base/', anonymous_note, name='anonymous_note'),
     path('admin/', admin.site.urls),
     path('base/users/', include('django.contrib.auth.urls')),
-    path('base/users/', include('users.urls')),
+    path('base/users/', include('users.urls')), 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

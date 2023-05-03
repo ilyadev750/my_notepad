@@ -5,9 +5,8 @@ from note.views import new_user_note, get_user_notes, update_user_note
 urlpatterns = [
     path('login_user/', login_user, name="login"),
     path('logout_user/', logout_user, name="logout"),
-    path('register_user/', register_user, name="register_user"),
-    path('<item>/', new_user_note,  name="new_user_note"),
-    # path('current/id1/', get_user_notes, name='us'),
-    re_path(r"^current/id(?P<id>[0-9]{1,7})/$", get_user_notes, name='back'),
-    re_path(r"^current/id(?P<id>[0-9]{1,7})/(?P<slug>[\w-]+)/$", update_user_note),
+    path('register_user/', register_user, name="register"),
+    path('<int:user_id>/', get_user_notes, name="get_user_notes"),
+    path('<int:user_id>/<str:type_of_note>/', new_user_note, name="new_user_note"),
+    path('<int:user_id>/<str:title>/', update_user_note, name='update_note'),
 ]
