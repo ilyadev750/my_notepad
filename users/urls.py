@@ -8,6 +8,6 @@ urlpatterns = [
     path('register_user/', register_user, name="register"),
     path('<int:user_id>/', get_user_notes, name="get_user_notes"),
     path('<int:user_id>/<str:type_of_note>/create/', new_user_note, name="new_user_note"),
-    path('<int:user_id>/<str:title>/<int:id>/update/', update_user_note, name='update_note'),
-    path('<int:user_id>/<str:title>/<int:id>/delete/', delete_user_note, name='delete_note'),
+    path('<int:user_id>/<str:title>/<int:note_id>/update/', update_user_note, name='update_note'),
+    path('<int:user_id>/<str:title>/<int:note_id>/delete/', delete_user_note, name='delete_note'),
 ]

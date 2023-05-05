@@ -1,8 +1,16 @@
 {% for obj in user_objects %}
-<a href="{{obj.title}}/{{obj.id}}/update/">{{obj.title}}</a>
+<!-- <a href="{{obj.title}}/{{obj.id}}/update/">{{obj.title}}</a> -->
+<a href="{% url 'update_note' user_id=user_id title=obj.title note_id=obj.id %}"
+  >{{obj.title}}</a
+>
 {{obj.create}} {{obj.update}}
-<a href="{{obj.title}}/{{obj.id}}/delete/">Delete</a>
+<a href="{% url 'delete_note' user_id=user_id title=obj.title note_id=obj.id %}"
+  >Delete</a
+>
 <br />
 {% endfor %}
-<a href="new/create/">Create new note</a>
+<a href="{% url 'new_user_note' user_id=user_id type_of_note='new' %}"
+  >Create new note</a
+>
+<br />
 <a href="{% url 'logout' %}">Logout</a>

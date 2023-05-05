@@ -72,3 +72,7 @@ def render_to_pdf(template_src, context={}):
         return HttpResponse(result.getvalue(), content_type='application/pdf')
     return HttpResponse('Errors')
 
+def make_pdf(request):
+    context = {'title': request.session['title'], 'content': request.session['content']}
+    pdf = render_to_pdf('user_note.html', context)
+    return pdf
