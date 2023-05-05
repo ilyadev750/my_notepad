@@ -3,6 +3,7 @@ import os
 from django.urls import reverse
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from users.views import logout
 from .functions import render_to_pdf
 from .functions import prepare_data_for_form, add_info_in_new_object_and_session, add_info_in_session, \
     extract_data_from_object, add_info_in_current_object_and_session
@@ -37,7 +38,6 @@ def get_user_notes(request, *args, **kwargs):
         return render(request, 'note/all_user_notes.html', context) 
 
 def new_user_note(request, *args, **kwargs):
-    print(kwargs)
     if kwargs['type_of_note'] == 'new':
         request.session['title'] = ''
         request.session['content'] = ''
@@ -59,19 +59,25 @@ def new_user_note(request, *args, **kwargs):
                     pdf = render_to_pdf('user_note.html', context)
                     return HttpResponse(pdf, content_type='application/pdf')
                 
-
                 elif 'logout' in request.POST:
-                    return render(request, 'note/first.html', {})
+                    logout(request)
+                    return redirect('start')
         context = {'form': form, 'fields': ['title', 'content'] }
-        return render(request, 'note/editor.html', context)    
+        return render(request, 'note/editor.html', context)
+
+def delete_user_note(request, *args, **kwargs):
+    if request.user.is_authenticated:
+        title = kwargs['title']
+        id = kwargs['id']
+        current_user_object = Note.objects.get(id=id, title=title)
+        current_user_object.delete()
+        return redirect('get_user_notes', request.user.id)
     
 def update_user_note(request, *args, **kwargs):
     if request.user.is_authenticated:
-        title = request.path.split('/')
-        title = title[-2]
-        current_user_object = Note.objects.filter(username=request.user.username, title=title)
-        if current_user_object:
-            current_user_object = current_user_object[0]
+        title = kwargs['title']
+        id = kwargs['id']
+        current_user_object = Note.objects.get(id=id, title=title)
         data = extract_data_from_object(current_user_object)
         form = UserUpdateNoteForm(data)
         if request.method == 'POST':
@@ -82,9 +88,7 @@ def update_user_note(request, *args, **kwargs):
 
             if 'save' in request.POST:
                 current_user_object.save()
-                user_id = request.user.id
-                # path = f"http://127.0.0.1:8000/base/users/id{user_id}/"
-                return redirect('back', (), {})
+                return redirect('get_user_notes', request.user.id)
             
             elif 'download' in request.POST:
                 context = {'title': request.session['title'], 'content': request.session['content']}
@@ -92,7 +96,8 @@ def update_user_note(request, *args, **kwargs):
                 return HttpResponse(pdf, content_type='application/pdf')
             
             elif 'logout' in request.POST:
-                return render(request, 'note/first.html', {})
+                logout(request)
+                return redirect('start')
 
         context = {'form': form}
         return render(request, 'note/editor.html', context)

@@ -1,6 +1,8 @@
 {% for obj in user_objects %}
-<a href="{{obj.title}}/">{{obj.title}}</a>
+<a href="{{obj.title}}/{{obj.id}}/update/">{{obj.title}}</a>
 {{obj.create}} {{obj.update}}
+<a href="{{obj.title}}/{{obj.id}}/delete/">Delete</a>
 <br />
 {% endfor %}
-<a href="new/">Create new note</a>
+<a href="new/create/">Create new note</a>
+<a href="{% url 'logout' %}">Logout</a>
