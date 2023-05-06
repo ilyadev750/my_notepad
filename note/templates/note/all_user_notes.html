@@ -1,5 +1,4 @@
 {% for obj in user_objects %}
-<!-- <a href="{{obj.title}}/{{obj.id}}/update/">{{obj.title}}</a> -->
 <a href="{% url 'update_note' user_id=user_id title=obj.title note_id=obj.id %}"
   >{{obj.title}}</a
 >

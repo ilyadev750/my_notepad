@@ -106,11 +106,21 @@
         </div>
       </div>
     <div class="col-sm-12">
-      <form action="{% url 'register_user' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %} {{ form.as_p }}
+      <form action="{% url 'register' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %} 
+        {% for field in form %}
+          <div class="fieldWrapper">
+            {{ field.errors }}
+            {{ field.label_tag }} {{ field }}
+            {% if field.help_text %}
+              <p class="help">{{ field.help_text|safe }}</p>
+            {% endif %}
+          </div>
+        {% endfor %}
         <br/><br/>
         <input type="submit" value="Register" />
       </form>
     </div>
+    <a href="{% url 'start' %}" >Back to start</a>
   </body>
 </html>
