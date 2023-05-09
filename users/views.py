@@ -2,12 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.utils.datastructures import MultiValueDictKeyError
+from .forms import CustomUserCreationForm
 from django.contrib.auth.forms import UserCreationForm
 
 
 def register_user(request, *args, **kwargs):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data["username"]
@@ -17,7 +18,7 @@ def register_user(request, *args, **kwargs):
             messages.success(request, ("Registration successful"))
             return redirect("new_user_note", request.user.id, "current")
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, "authenticate/register_user.html", {"form": form})
 
 
