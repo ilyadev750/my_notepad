@@ -42,3 +42,11 @@ def login_user(request, *args, **kwargs):
 def logout_user(request, *args, **kwargs):
     logout(request)
     return redirect("/base/")
+
+
+def reset_password(request, *args, **kwargs):
+    pass
+
+
+def set_password(request, *args, **kwargs):
+    pass
