@@ -7,7 +7,7 @@ from note.views import anonymous_note, start
 
 
 urlpatterns = [
-    path("", start, name="start"),
+    path("", start, name="home"),
     path("base/", anonymous_note, name="anonymous_note"),
     path("base/users/", include("users.urls")),
     path("admin/", admin.site.urls),
