@@ -1,28 +1,26 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>online-notebook</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <!-- <style>
-    body {
-      background: #9d2929;
-      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-    }
-  </style> -->
-  <body>
-    <div class="navbar">
-      <ul>
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'login' %}">Login</a></li>
-        <li><a href="{% url 'register' %}">Registration</a></li>
-      </ul>
-    </div>
-  </body>
-</html>
+{% extends 'base.html' %} 
+{% load static %} 
 
-<!-- <!DOCTYPE html>
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'note/css/first.css' %}" />
+{% endblock %} 
+
+{% block title %}
+checkout
+{% endblock %}
+
+
+{% block content %} 
+<ul>We We</ul>
+Hello II V
+{% endblock %}
+
+
+
+
+
+<!-- 
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
