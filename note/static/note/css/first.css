@@ -1,9 +1,38 @@
 body {
     background: #eff2f7;
-    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
   }
   
-  ul {
-    color: blue;
-    font-family: Arial, Helvetica, sans-serif;
-  }
+.notepad-mini {
+  float: left;
+  width: 90px;
+  padding-top: 3px;
+}
+
+.main-name {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 34px;
+  color: white;
+  font-weight: bold;
+  float: left;
+  display: block;
+  padding-top: 15px;
+}
+
+.navbar-custom {
+  overflow: hidden;
+  background-color: black;
+  border: none;
+}
+
+.navbar-custom a.split {
+  float: right;
+  text-decoration: none;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 25px;
+  display: block;
+  color: white;
+  padding: 20px 31px;
+  text-align: center;
+}
+

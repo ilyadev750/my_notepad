@@ -46,12 +46,12 @@ INSTALLED_APPS = [
     "users",
 ]
 
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
-        "LOCATION": os.path.join(BASE_DIR, "cache_info"),
-    }
-}
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+#         "LOCATION": os.path.join(BASE_DIR, "cache_info"),
+#     }
+# }
 
 
 MIDDLEWARE = [
