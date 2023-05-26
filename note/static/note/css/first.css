@@ -1,6 +1,8 @@
 body {
     background: #eff2f7;
+    height: 100%;
     margin: 0;
+    padding: 0;
   }
   
 .notepad-mini {
@@ -36,3 +38,10 @@ body {
   text-align: center;
 }
 
+.back-image {
+  height: 100%; 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 0;
+}
