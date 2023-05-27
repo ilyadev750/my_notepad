@@ -1,5 +1,7 @@
 body {
-    background: #eff2f7;
+    background-image: url("../img/notepad_big.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -13,12 +15,13 @@ body {
 
 .main-name {
   font-family: 'Ubuntu', sans-serif;
-  font-size: 34px;
+  font-size: 38px;
   color: white;
   font-weight: bold;
   float: left;
   display: block;
-  padding-top: 15px;
+  padding-top: 10px;
+  padding-left: 6px;
 }
 
 .navbar-custom {
@@ -31,17 +34,43 @@ body {
   float: right;
   text-decoration: none;
   font-family: 'Ubuntu', sans-serif;
-  font-size: 25px;
+  font-size: 20px;
   display: block;
   color: white;
   padding: 20px 31px;
   text-align: center;
 }
 
-.back-image {
-  height: 100%; 
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  padding: 0;
+.start-text {
+  font-family: 'Roboto', sans-serif;
+  color: black;
+  font-size: 70px;
+  text-align: center;
+  display: block;
+  margin-top: 300px;
+}
+
+.start-text p{
+  font-family: 'Roboto', sans-serif;
+  color: black;
+  font-size: 40px;
+  text-align: center;
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.central {
+  display: block;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.central button {
+  background-color: transparent;
+  font-family: 'Roboto', sans-serif;
+  color: white;
+  font-size: 30px;
+  padding: 10px 10px;
+  border-color: black;
 }
