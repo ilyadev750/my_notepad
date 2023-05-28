@@ -73,4 +73,15 @@ body {
   font-size: 30px;
   padding: 10px 10px;
   border-color: black;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.central button:hover {
+  background-color: white;
+  color: black;
+}
+
+.central button:active {
+  opacity: 0.7;
 }
