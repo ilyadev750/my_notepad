@@ -13,11 +13,11 @@ Notepad-online
 
 {% block content %} 
 <div class="navbar-custom">
-  <a class="main-name">Notepad</a>
-  <a href="#" class="split">Registration</a>
-  <a href="#" class="split">Login</a>
+  <a class="main-name" href="{% url 'home' %}">Notepad</a>
+  <a href="{% url 'register' %}" class="split">Registration</a>
+  <a href="{% url 'login' %}" class="split">Login</a>
   <a href="#" class="split">About</a>
-  <a href="#" class="split">Home</a>
+  <a href="{% url 'home' %}" class="split">Home</a>
 </div>
 
 <div class="start-text">
@@ -25,7 +25,9 @@ Notepad-online
   <p>A simple online tool for creating notes</p>
 </div>
 <div class="central">
-  <button>Start to work!</button>
+  <a href="{% url 'anonymous_note' %}">
+    <button>Start to work!</button>
+  </a>
 </div>
 
 
