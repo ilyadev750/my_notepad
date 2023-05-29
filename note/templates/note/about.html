@@ -1,0 +1,40 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'note/css/about.css' %}" />
+  <link rel="stylesheet" href="{% static 'note/css/first.css' %}" />
+{% endblock %} 
+
+{% block title %}
+About notepad
+{% endblock %}
+
+{% block content %} 
+
+<div class="navbar-custom">
+    <a class="main-name" href="{% url 'home' %}">Notepad</a>
+    <a href="{% url 'register' %}" class="split-brown">Registration</a>
+    <a href="{% url 'login' %}" class="split-blue">Login</a>
+    <a href="{% url 'about' %}" class="split">About</a>
+    <a href="{% url 'home' %}" class="split">Home</a>
+  </div>
+
+<div class="notepad-description">
+    <div>
+        <h2>Anonymous</h2>
+        <p>You could work with notes without registration</p>
+    </div>
+    <div>
+        <h2>Registration</h2>
+        <p>With registration you could save notes in account</p>
+    </div>
+    <div>
+        <h2>Download</h2>
+        <p>You could download a note in computer/phone</p>
+    </div>
+</div>
+
+{% endblock %}
+

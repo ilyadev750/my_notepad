@@ -20,6 +20,11 @@ def start(request, *args, **kwargs):
         return render(request, "note/first.html", context)
 
 
+def about(request, *args, **kwargs):
+    context = {}
+    return render(request, "note/about.html", context)
+
+
 def anonymous_note(request, *args, **kwargs):
     data = prepare_data_for_form(request)
     form = AnonymousNoteForm(data)
@@ -111,7 +116,3 @@ def delete_user_note(request, *args, **kwargs):
         )
         current_user_object.delete()
         return redirect("get_user_notes", request.user.id)
-
-
-# add HTTP404
-# make reset password
