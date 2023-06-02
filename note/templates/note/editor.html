@@ -1,4 +1,60 @@
-<!DOCTYPE html>
+{% extends 'base.html' %} 
+{% load static %} 
+{% block css %}
+    <link rel="stylesheet" href="{% static 'note/css/font-awesome/css/font-awesome.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'note/css/about.css' %}" />
+    <link rel="stylesheet" href="{% static 'note/css/editor.css' %}" />
+{% endblock %} 
+
+
+{% block title %}
+Editor
+{% endblock %}
+
+{% block content %} 
+
+<div class="navbar-custom">
+  <a class="main-name" href="{% url 'home' %}">Notepad</a>
+  {% if user.is_authenticated %}
+    <a href="#" class="split-brown">{{ user }}</a>
+    <a href="{% url 'logout' %}" class="split-blue">Logout</a>
+  {% else %}
+    <a href="#" class="split-brown">{{ user }}</a>
+    <a href="{% url 'about' %}" class="split">About</a>
+    <a href="{% url 'home' %}" class="split">Home</a>
+  {% endif %}
+</div>
+
+<div class="editor-container">
+  <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %} 
+    {% for field in form %}
+      {% if field.is_hidden %}
+        {{ field }}
+      {% else %}
+        {# {{field.errors}} #}
+        <p>{{ field.label_tag }}</p>
+        <p>{{ field }}</p>
+      {% endif %}
+    {% endfor %}
+    {% if user.is_authenticated %}
+      <input type="submit" name="save" value="Save" />
+      <input type="submit" name="logout" value="Logout" />
+    {% else %}
+      <input type="submit" name="register" value="Register" />
+      <input type="submit" name="login" value="Login" />
+    {% endif %}
+    <input type="submit" name="download" value="Download" />
+  </form>
+
+</div>
+
+{% endblock %}
+
+
+
+
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -126,4 +182,4 @@
       </form>
     </div>
   </body>
-</html>
+</html> -->
