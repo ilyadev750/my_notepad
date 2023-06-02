@@ -3,8 +3,9 @@
 
 
 {% block css %}
-  <link rel="stylesheet" href="{% static 'note/css/about.css' %}" />
-  <link rel="stylesheet" href="{% static 'note/css/first.css' %}" />
+    <link rel="stylesheet" href="{% static 'note/css/font-awesome/css/font-awesome.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'note/css/about.css' %}" />
+    <link rel="stylesheet" href="{% static 'note/css/first.css' %}" />
 {% endblock %} 
 
 {% block title %}
@@ -24,15 +25,17 @@ About notepad
 <div class="notepad-description">
     <div>
         <h2>Anonymous</h2>
-        <p>&#128394</p>
+        <i class="fa fa-pencil-square fa-4x center" aria-hidden="true"></i>
         <p>You could work with notes without registration</p>
     </div>
     <div>
         <h2>Registration</h2>
+        <i class="fa fa-archive fa-4x center" aria-hidden="true"></i>
         <p>With registration you could save notes in account</p>
     </div>
     <div>
         <h2>Download</h2>
+        <i class="fa fa-file-pdf-o fa-4x center" aria-hidden="true"></i>
         <p>You could download a note in computer/phone</p>
     </div>
 </div>

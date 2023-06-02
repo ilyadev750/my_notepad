@@ -8,7 +8,6 @@ body {
   }
   
 .notepad-description {
-    padding-top: 100px;
     font-family: 'Ubuntu', sans-serif;
     font-size: 20px;
     display: block;
@@ -26,6 +25,12 @@ body {
 .notepad-description p {
     text-align: center;
 }
+
+.center {
+    text-align: center;
+    width: 100%;
+}
+
 
 
 /* .notepad-description > div {
