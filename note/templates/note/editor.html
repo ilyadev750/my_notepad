@@ -34,7 +34,13 @@ Editor
       {% else %}
         {# {{field.errors}} #}
         <p>{{ field.label_tag }}</p>
-        <p>{{ field }}</p>
+        {% if field.label_tag == Content %}
+          <div class="form-content">
+            <p>{{ field }}</p>
+          </div>
+        {% else %}
+          <p>{{ field }}</p>
+        {% endif %}
       {% endif %}
     {% endfor %}
     {% if user.is_authenticated %}

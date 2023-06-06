@@ -10,7 +10,7 @@ class AnonymousNoteForm(forms.Form):
         widget=forms.TextInput(attrs={"class": "editor-container"}),
     )
     content = forms.CharField(
-        widget=forms.TextInput(attrs={"class": "editor-container"}), required=False
+        widget=forms.TextInput(attrs={"class": "form-content"}), required=False
     )
     create = forms.DateTimeField(widget=forms.HiddenInput())
     update = forms.DateTimeField(widget=forms.HiddenInput())

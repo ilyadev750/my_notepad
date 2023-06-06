@@ -73,11 +73,25 @@ a.split-brown:active {
 }
 
 .editor-container {
-  width: 100%;
+  font-family: 'Ubuntu', sans-serif;
+  width: 70%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
-  border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
+
+.form-content {
+  width: 70%;
+  height: 400px;
+  vertical-align: top;
+}
+  
+
+
+
+
+/* .editor-container input{
+  text-align: center;
+} */
