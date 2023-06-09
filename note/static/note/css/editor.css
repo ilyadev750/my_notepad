@@ -72,22 +72,37 @@ a.split-brown:active {
   opacity: 0.7;
 }
 
-.editor-container {
-  font-family: 'Ubuntu', sans-serif;
-  width: 70%;
+/* input[type=text] {
+  width: 100px;
   padding: 12px 20px;
   margin: 8px 0;
-  display: inline-block;
-  border-radius: 4px;
   box-sizing: border-box;
+  border: 2px solid red;
+  border-radius: 4px;
+} */
+
+
+.editor-container {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 20px;
+  padding-left: 8px;
+  width: 892px;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 4px;
+  margin-right: 0;
 }
 
 .form-content {
-  width: 70%;
+  padding-left: 8px;
+  display: inline-block;
+  width: 892px;
+  font-size: 20px;
   height: 400px;
   vertical-align: top;
+  border-radius: 4px;
 }
-  
+
 
 
 

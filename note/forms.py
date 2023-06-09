@@ -10,7 +10,8 @@ class AnonymousNoteForm(forms.Form):
         widget=forms.TextInput(attrs={"class": "editor-container"}),
     )
     content = forms.CharField(
-        widget=forms.TextInput(attrs={"class": "form-content"}), required=False
+        widget=forms.Textarea(attrs={"class": "form-content"}),
+        required=False,
     )
     create = forms.DateTimeField(widget=forms.HiddenInput())
     update = forms.DateTimeField(widget=forms.HiddenInput())
@@ -22,7 +23,7 @@ class UserCreateNoteForm(forms.Form):
         max_length=255, widget=forms.TextInput(attrs={"class": "editor-container"})
     )
     content = forms.CharField(
-        widget=forms.TextInput(attrs={"class": "editor-container"})
+        widget=forms.Textarea(attrs={"class": "editor-container"})
     )
     create = forms.DateTimeField(widget=forms.HiddenInput())
     update = forms.DateTimeField(widget=forms.HiddenInput())
