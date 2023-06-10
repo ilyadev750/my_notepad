@@ -26,10 +26,7 @@ Editor
 </div>
 
 
-
-
-
- <div class="editor-container">
+<div class="editor-container">
   <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %} 
     {% for field in form %}
@@ -48,13 +45,17 @@ Editor
       {% endif %}
     {% endfor %}
     {% if user.is_authenticated %}
-      <input type="submit" name="save" value="Save" />
-      <input type="submit" name="logout" value="Logout" />
+      <div>
+        <button type="submit" name="save" value="Save">
+        <input type="submit" name="logout" value="Logout" />
+      </div>
     {% else %}
-      <input type="submit" name="register" value="Register" />
-      <input type="submit" name="login" value="Login" />
+      <div>
+        <button class="register-button" type="submit" name="register">Register</button>
+        <button class="login-button" type="submit" name="login">Login</button>
+        <button class="download-button" type="submit" name="download">Download</button>
+      </div>
     {% endif %}
-    <input type="submit" name="download" value="Download" />
   </form>
 
 </div> 

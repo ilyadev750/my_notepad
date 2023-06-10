@@ -72,15 +72,14 @@ a.split-brown:active {
   opacity: 0.7;
 }
 
-/* input[type=text] {
-  width: 100px;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border: 2px solid red;
-  border-radius: 4px;
-} */
-
+input[type=submit] {
+  padding:5px 15px; 
+  background:blue; 
+  border:0 none;
+  cursor:pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; 
+}
 
 .editor-container {
   font-family: 'Ubuntu', sans-serif;
@@ -103,10 +102,39 @@ a.split-brown:active {
   border-radius: 4px;
 }
 
-
-
-
-
-/* .editor-container input{
+.login-button {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 20px;
   text-align: center;
-} */
+  background-color: blue;
+  color: white;
+  width: 120px;
+  padding: 10px 30px;
+  border-radius: 16px;
+  margin-top: 10px;
+  margin-left: 8px;
+}
+
+.register-button {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 20px;
+  text-align: center;
+  background-color: #6a2525;
+  color: white;
+  padding: 10px 30px;
+  border-radius: 16px;
+  margin-top: 10px;
+  margin-left: 8px;
+}
+
+.download-button {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 20px;
+  text-align: center;
+  background-color: #21e707;
+  color: white;
+  padding: 10px 30px;
+  border-radius: 16px;
+  margin-top: 10px;
+  margin-left: 8px;
+}
