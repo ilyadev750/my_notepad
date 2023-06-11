@@ -1,21 +1,12 @@
-body {
-    background-image: url("../img/notepad_big.jpg");
-    background-size: 100%;
-    background-repeat: no-repeat;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  
+
 .notepad-description {
     font-family: 'Ubuntu', sans-serif;
     font-size: 20px;
     display: block;
     margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .notepad-description h2 {

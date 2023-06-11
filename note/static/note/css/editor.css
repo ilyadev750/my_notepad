@@ -1,12 +1,4 @@
-body {
-    background-image: url("../img/notepad_big.jpg");
-    background-size: 100%;
-    background-repeat: no-repeat;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  
+
 .notepad-mini {
   float: left;
   width: 90px;
@@ -23,53 +15,6 @@ body {
   display: block;
   padding-top: 10px;
   padding-left: 6px;
-}
-
-.navbar-custom {
-  font-family: 'Ubuntu', sans-serif;
-  overflow: hidden;
-  background-color: black;
-  border: none;
-}
-
-.navbar-custom a.split {
-  float: right;
-  text-decoration: none;
-  font-size: 20px;
-  display: block;
-  color: white;
-  padding: 20px 31px;
-  text-align: center;
-}
-
-.navbar-custom a.split-blue {
-  float: right;
-  background-color: blue;
-  text-decoration: none;
-  font-size: 20px;
-  display: block;
-  color: white;
-  padding: 20px 31px;
-  text-align: center;
-}
-
-a.split-blue:active {
-  opacity: 0.7;
-}
-
-.navbar-custom a.split-brown {
-  float: right;
-  background-color: #6a2525;
-  text-decoration: none;
-  font-size: 20px;
-  display: block;
-  color: white;
-  padding: 20px 31px;
-  text-align: center;
-}
-
-a.split-brown:active {
-  opacity: 0.7;
 }
 
 input[type=submit] {
@@ -102,39 +47,35 @@ input[type=submit] {
   border-radius: 4px;
 }
 
-.login-button {
+button {
   font-family: 'Ubuntu', sans-serif;
   font-size: 20px;
   text-align: center;
-  background-color: blue;
   color: white;
-  width: 120px;
   padding: 10px 30px;
   border-radius: 16px;
   margin-top: 10px;
   margin-left: 8px;
+  cursor: pointer;
+}
+
+.login-button {
+  background-color: blue;
+  width: 120px;
 }
 
 .register-button {
-  font-family: 'Ubuntu', sans-serif;
-  font-size: 20px;
-  text-align: center;
   background-color: #6a2525;
-  color: white;
-  padding: 10px 30px;
-  border-radius: 16px;
-  margin-top: 10px;
-  margin-left: 8px;
 }
 
 .download-button {
-  font-family: 'Ubuntu', sans-serif;
-  font-size: 20px;
-  text-align: center;
   background-color: #21e707;
-  color: white;
-  padding: 10px 30px;
-  border-radius: 16px;
-  margin-top: 10px;
-  margin-left: 8px;
+}
+
+.save-button {
+  background-color: #820dac;
+}
+
+.logout-button {
+  background-color: #ac0d0d;
 }

@@ -2,7 +2,6 @@
 {% load static %} 
 {% block css %}
     <link rel="stylesheet" href="{% static 'note/css/font-awesome/css/font-awesome.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'note/css/about.css' %}" />
     <link rel="stylesheet" href="{% static 'note/css/editor.css' %}" />
 {% endblock %} 
 
@@ -46,8 +45,8 @@ Editor
     {% endfor %}
     {% if user.is_authenticated %}
       <div>
-        <button type="submit" name="save" value="Save">
-        <input type="submit" name="logout" value="Logout" />
+        <button class="save-button" type="submit" name="save">Save</button>
+        <button class="logout-button" type="submit" name="logout">Logout</button>
       </div>
     {% else %}
       <div>

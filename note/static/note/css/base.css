@@ -1,0 +1,69 @@
+    body {
+        background-image: url("../img/notepad_big.jpg");
+        background-size: 100%;
+        background-repeat: no-repeat;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+  .main-name {
+    font-family: 'Ubuntu', sans-serif;
+    text-decoration: none;
+    font-size: 38px;
+    color: white;
+    font-weight: bold;
+    float: left;
+    display: block;
+    padding-top: 10px;
+    padding-left: 6px;
+  }
+
+  .navbar-custom {
+    font-family: 'Ubuntu', sans-serif;
+    overflow: hidden;
+    background-color: black;
+    border: none;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  
+  .navbar-custom a.split {
+    float: right;
+    text-decoration: none;
+    font-size: 20px;
+    display: block;
+    color: white;
+    padding: 20px 31px;
+    text-align: center;
+  }
+  
+  .navbar-custom a.split-blue {
+    float: right;
+    background-color: blue;
+    text-decoration: none;
+    font-size: 20px;
+    display: block;
+    color: white;
+    padding: 20px 31px;
+    text-align: center;
+  }
+  
+  a.split-blue:active {
+    opacity: 0.7;
+  }
+  
+  .navbar-custom a.split-brown {
+    float: right;
+    background-color: #6a2525;
+    text-decoration: none;
+    font-size: 20px;
+    display: block;
+    color: white;
+    padding: 20px 31px;
+    text-align: center;
+  }
+  
+  a.split-brown:active {
+    opacity: 0.7;
+  }
