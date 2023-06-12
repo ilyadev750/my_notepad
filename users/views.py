@@ -49,8 +49,12 @@ def login_user(request, *args, **kwargs):
 
 
 def logout_user(request, *args, **kwargs):
+    # if request.method == "POST":
+    #     logout(request)
+    #     return redirect("/base/")
+    # else:
     logout(request)
-    return redirect("/base/")
+    return redirect("home")
 
 
 def password_reset_request(request):

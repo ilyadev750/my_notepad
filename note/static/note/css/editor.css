@@ -59,6 +59,15 @@ button {
   cursor: pointer;
 }
 
+button:hover {
+  background-color: white;
+  color: black;
+}
+
+button:active {
+  opacity: 0.7;
+}
+
 .login-button {
   background-color: blue;
   width: 120px;

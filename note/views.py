@@ -9,6 +9,7 @@ from .functions import (
     make_pdf,
 )
 from .forms import AnonymousNoteForm, UserCreateNoteForm, UserUpdateNoteForm
+from django.contrib.auth import logout
 from .models import Note
 
 
@@ -79,6 +80,10 @@ def new_user_note(request, *args, **kwargs):
                     pdf = make_pdf(request)
                     return HttpResponse(pdf, content_type="application/pdf")
 
+                elif "logout" in request.POST:
+                    logout(request)
+                    return redirect("home")
+
         context = {"form": form}
         return render(request, "note/editor.html", context)
 
@@ -104,6 +109,10 @@ def update_user_note(request, *args, **kwargs):
             elif "download" in request.POST:
                 pdf = make_pdf(request)
                 return HttpResponse(pdf, content_type="application/pdf")
+
+            elif "logout" in request.POST:
+                logout(request)
+                return redirect("home")
 
         context = {"form": form}
         return render(request, "note/editor.html", context)
