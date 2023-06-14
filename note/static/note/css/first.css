@@ -19,52 +19,61 @@
 
 .navbar-custom {
   font-family: 'Ubuntu', sans-serif;
+  height: 60px;
   overflow: hidden;
   background-color: black;
   border: none;
-  flex-direction: column;
-  justify-content: space-around;
+  display: flex;
+  flex-direction: row;
 }
 
-.navbar-custom a.split {
-  float: right;
-  text-decoration: none;
-  font-size: 20px;
-  display: block;
+.navbar-custom a{
   color: white;
-  padding: 20px 31px;
   text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
 }
 
-.navbar-custom a.split-blue {
-  float: right;
+.navbar-custom a:active {
+  opacity: 0.7;
+} 
+
+.navbar-custom-notepad {
+  flex: 1;
+}
+
+.navbar-custom-home-about {
+  width: 150px;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  line-height: 60px;
+  font-size: 20px;
+  color: white;
+}
+
+.navbar-custom-login {
+  width: 150px;
   background-color: blue;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 60px;
   text-decoration: none;
   font-size: 20px;
-  display: block;
   color: white;
-  padding: 20px 31px;
-  text-align: center;
 }
 
-a.split-blue:active {
-  opacity: 0.7;
-}
-
-.navbar-custom a.split-brown {
-  float: right;
+.navbar-custom-registration {
+  width: 150px;
   background-color: #6a2525;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 60px;
   text-decoration: none;
   font-size: 20px;
-  display: block;
   color: white;
-  padding: 20px 31px;
-  text-align: center;
 }
 
-a.split-brown:active {
-  opacity: 0.7;
-}
 
 .start-text {
   font-family: 'Roboto', sans-serif;

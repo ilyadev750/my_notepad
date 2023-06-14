@@ -1,7 +1,12 @@
   body {
       background-image: url("../img/notepad_big.jpg");
-      background-size: 100%;
+      justify-content: center;
       background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
       height: 100%;
       margin: 0;
       padding: 0;
@@ -18,7 +23,7 @@
     padding-top: 10px;
     padding-left: 6px;
   }
-
+/* 
   .navbar-custom {
     font-family: 'Ubuntu', sans-serif;
     overflow: hidden;
@@ -27,27 +32,6 @@
     justify-content: space-around;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-  /* .navbar-custom {
-    font-family: 'Ubuntu', sans-serif;
-    overflow: hidden;
-    background-color: black;
-    border: none;
-    flex-direction: column;
-    justify-content: space-around;
-  } */
-  
   .navbar-custom a.split {
     float: right;
     text-decoration: none;
@@ -86,4 +70,61 @@
   
   a.split-brown:active {
     opacity: 0.7;
+  } */
+
+  .navbar-custom {
+    font-family: 'Ubuntu', sans-serif;
+    height: 60px;
+    overflow: hidden;
+    background-color: black;
+    border: none;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .navbar-custom a{
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+  }
+  
+  .navbar-custom a:active {
+    opacity: 0.7;
+  } 
+  
+  .navbar-custom-notepad {
+    flex: 1;
+  }
+  
+  .navbar-custom-home-about {
+    width: 150px;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    line-height: 60px;
+    font-size: 20px;
+    color: white;
+  }
+  
+  .navbar-custom-login {
+    width: 150px;
+    background-color: blue;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 60px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+  }
+  
+  .navbar-custom-registration {
+    width: 150px;
+    background-color: #6a2525;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 60px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
   }

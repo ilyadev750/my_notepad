@@ -13,12 +13,30 @@ Notepad-online
 
 {% block content %} 
 <div class="navbar-custom">
+  <div class="navbar-custom-notepad">
+    <a class="main-name" href="{% url 'home' %}">Notepad</a>
+  </div>
+  <div class="navbar-custom-home-about">
+    <a href="{% url 'home' %}">Home</a>
+  </div>
+  <div class="navbar-custom-home-about">
+    <a href="{% url 'about' %}">About</a>
+  </div>
+  <div class="navbar-custom-login">
+    <a href="{% url 'login' %}">Login</a>
+  </div>
+  <div class="navbar-custom-registration">
+    <a href="{% url 'register' %}">Registration</a>
+  </div>
+</div>
+
+<!-- <div class="navbar-custom">
   <a class="main-name" href="{% url 'home' %}">Notepad</a>
   <a href="{% url 'register' %}" class="split-brown">Registration</a>
   <a href="{% url 'login' %}" class="split-blue">Login</a>
   <a href="{% url 'about' %}" class="split">About</a>
   <a href="{% url 'home' %}" class="split">Home</a>
-</div>
+</div> -->
 
 <div class="start-text">
   Notepad-online
