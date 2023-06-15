@@ -23,54 +23,6 @@
     padding-top: 10px;
     padding-left: 6px;
   }
-/* 
-  .navbar-custom {
-    font-family: 'Ubuntu', sans-serif;
-    overflow: hidden;
-    background-color: black;
-    border: none;
-    justify-content: space-around;
-  }
-
-  .navbar-custom a.split {
-    float: right;
-    text-decoration: none;
-    font-size: 20px;
-    display: block;
-    color: white;
-    padding: 20px 31px;
-    text-align: center;
-  }
-  
-  .navbar-custom a.split-blue {
-    float: right;
-    background-color: blue;
-    text-decoration: none;
-    font-size: 20px;
-    display: block;
-    color: white;
-    padding: 20px 31px;
-    text-align: center;
-  }
-  
-  a.split-blue:active {
-    opacity: 0.7;
-  }
-  
-  .navbar-custom a.split-brown {
-    float: right;
-    background-color: #6a2525;
-    text-decoration: none;
-    font-size: 20px;
-    display: block;
-    color: white;
-    padding: 20px 31px;
-    text-align: center;
-  }
-  
-  a.split-brown:active {
-    opacity: 0.7;
-  } */
 
   .navbar-custom {
     font-family: 'Ubuntu', sans-serif;
@@ -119,6 +71,30 @@
   }
   
   .navbar-custom-registration {
+    width: 150px;
+    background-color: #6a2525;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 60px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+  }
+
+  .navbar-custom-user {
+    width: 150px;
+    background-color: red;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 60px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+  }
+
+  .navbar-custom-logout {
     width: 150px;
     background-color: #6a2525;
     text-align: center;
