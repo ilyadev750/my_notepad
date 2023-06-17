@@ -29,21 +29,25 @@ input[type=submit] {
 .editor-container {
   font-family: 'Ubuntu', sans-serif;
   font-size: 20px;
-  padding-left: 8px;
-  width: 892px;
-  display: inline-block;
-  vertical-align: middle;
+  text-align: center;
+  display: block;
   border-radius: 4px;
   margin-right: 0;
 }
 
 .form-content {
-  padding-left: 8px;
   display: inline-block;
   width: 892px;
   font-size: 20px;
   height: 400px;
   vertical-align: top;
+  border-radius: 4px;
+}
+
+.form-content-title {
+  font-size: 20px;
+  height: 30px;
+  width: 892px;
   border-radius: 4px;
 }
 
