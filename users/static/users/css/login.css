@@ -1,4 +1,88 @@
+.notepad-container {
+  margin-top: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .notepad-image {
-    margin-top: 100px;
-    width: 150px;
+  text-align: center;
+  width: 200px;
+}
+
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 'Ubuntu', sans-serif;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+}
+
+input[type="text"],
+input[type="password"] {
+  font: 'Ubuntu', sans-serif;
+  font-size: 20px;
+  width: 100%;
+  margin: 8px 0;
+  padding: 12px 20px;
+  display: inline-block;
+  border: 2px solid gray;
+  box-sizing: border-box;
+}
+
+label {
+  font: 'Ubuntu', sans-serif;
+  font-size: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.forgot-password {
+  padding: 10px 30px;
+  font: 'Ubuntu', sans-serif;
+  font-size: 20px;
+  text-decoration: none;
+  color: rgb(27, 4, 102);
+}
+
+.login-button {
+  font: 'Ubuntu', sans-serif;
+  font-size: 20px;
+  padding: 10px 30px;
+  display: flex;
+  justify-content: center;
+  background-color: blue;
+  width: 160px;
+  border-radius: 16px;
+}
+
+button:hover {
+  background-color: white;
+  color: black;
+}
+
+button:active {
+  opacity: 0.7;
+}
+
+.create-user {
+  padding-top: 10px;
+  text-align: center;
+  font: 'Ubuntu', sans-serif;
+  font-size: 20px;
+}
+
+.create-user-link {
+  color: rgb(27, 4, 102);
+  text-decoration: none;
 }
