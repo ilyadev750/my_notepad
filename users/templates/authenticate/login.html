@@ -1,4 +1,20 @@
-<!DOCTYPE html>
+{% extends 'base.html' %} 
+{% load static %} 
+{% block css %}
+    <link rel="stylesheet" href="{% static 'users/css/login.css' %}" />
+{% endblock %} 
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %} 
+<div class="notepad-image">
+  <img src="/users/static/users/img/updnotepad.png">
+</div>
+{% endblock %}
+
+<!-- <!DOCTYPE html>
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -74,4 +90,4 @@
       </div>
     </form>
   </body>
-</html>
+</html> -->

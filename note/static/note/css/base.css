@@ -10,6 +10,7 @@
       height: 100%;
       margin: 0;
       padding: 0;
+      flex-shrink: 0;
   }
 
   .main-name {
@@ -32,6 +33,7 @@
     border: none;
     display: flex;
     flex-direction: row;
+    flex-shrink: 0;
   }
   
   .navbar-custom a{
