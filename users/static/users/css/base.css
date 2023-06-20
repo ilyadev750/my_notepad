@@ -1,10 +1,11 @@
   body {
-      background-image: url("../img/notepad_big.jpg");
-      background-size: 100%;
-      background-repeat: no-repeat;
-      height: 100%;
-      margin: 0;
-      padding: 0;
+    font: 'Ubuntu', sans-serif;
+    background-image: url("../img/notepad_big.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    height: 100%;
+    margin: 0;
+    padding: 0;
   }
 
   .main-name {
