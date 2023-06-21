@@ -86,3 +86,7 @@ button:active {
   color: rgb(27, 4, 102);
   text-decoration: none;
 }
+
+.form-item {
+  width: 309px;
+}

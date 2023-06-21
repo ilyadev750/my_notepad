@@ -26,6 +26,8 @@ def register_user(request, *args, **kwargs):
             login(request, user)
             messages.success(request, ("Registration successful"))
             return redirect("new_user_note", request.user.id, "current")
+        elif "home" in request.POST:
+            return redirect("home")
     else:
         form = CustomUserCreationForm()
     return render(request, "authenticate/register_user.html", {"form": form})

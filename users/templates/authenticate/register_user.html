@@ -19,20 +19,23 @@ Registration
 <div class="form-container">
   <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %} 
-    <div class="fieldWrapper">
       {% for field in form %}
         {{ field.errors }}
-        <p>
-        {{ field.label_tag }} 
-        </p>
-        {{ field }}
+        <div class="fieldWrapper">
+          {{ field.label_tag }}
+        </div>
+        <div class="fieldWrapper">
+          {{ field }}
+        </div>
         {% if field.help_text %}
           <p class="help">{{ field.help_text|safe }}</p>
         {% endif %}
       {% endfor %}
-    </div>
       <br/><br/>
-      <input type="submit" value="Register" />
+      <div>
+        <button class="register-button" type="submit" name="register">Register</button>
+        <button class="home-button" type="submit" name="home">Back to home</button>
+      </div>
   </form>
 </div>
 {% endblock %}
