@@ -1,3 +1,41 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block css %}
+    <link rel="stylesheet" href="{% static 'note/css/all_user_notes.css' %}" />
+{% endblock %} 
+
+
+{% block title %}
+User notes
+{% endblock %}
+
+
+{% block content %} 
+<div class="navbar-custom">
+  <div class="navbar-custom-notepad">
+    <a class="main-name" href="{% url 'home' %}">Notepad</a>
+  </div>
+  <div class="navbar-custom-user">
+    <a href="#">{{ user }}</a>
+  </div>
+  <div class="navbar-custom-logout">
+    <a href="{% url 'logout' %}">Logout</a>
+  </div>
+</div>
+
+<div class="notes-table">
+  <div class="column-name">
+    Name
+  </div>
+  <div class="creation-time-column">
+    Time of creation
+  </div>
+  <div class="update-time-column">
+    Time of update
+  </div>
+
+</div>
+
 {% for obj in user_objects %}
 <a href="{% url 'update_note' user_id=user_id title=obj.title note_id=obj.id %}"
   >{{obj.title}}</a
@@ -12,4 +50,5 @@
   >Create new note</a
 >
 <br />
-<a href="{% url 'logout' %}">Logout</a>
+
+{% endblock %}

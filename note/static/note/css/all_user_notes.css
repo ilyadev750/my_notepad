@@ -1,0 +1,7 @@
+.notes-table {
+  display: flex;
+}
+
+.column-name, .creation-time-column, .update-time-column {
+  display: flex;
+}

@@ -105,3 +105,14 @@
     font-size: 20px;
     color: white;
   }
+
+  .navbar-custom-back {
+    width: 150px;
+    background-color: #0f515d;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 60px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+  }
