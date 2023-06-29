@@ -1,7 +1,26 @@
 .notes-table {
+  padding-top: 50px;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 30px;
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .column-name, .creation-time-column, .update-time-column {
+  padding: 10px 20px;
+  width: 300px;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  border-color: black;
+  border-style: solid;
+  border-width: 3px;
+}
+
+.name-column-inside, .creation-time-column-inside, .update-time-column-inside {
+  display: inline-block;
+  /* align-items: center;
+  justify-content: center;
+  flex-direction: column; */
 }

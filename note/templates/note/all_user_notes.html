@@ -33,8 +33,35 @@ User notes
   <div class="update-time-column">
     Time of update
   </div>
-
 </div>
+{% for obj in user_objects %}
+  <div class="notes-table">
+    <div class="column-name">
+      Name
+    </div>
+    <div class="creation-time-column">
+      Time of creation
+    </div>
+    <div class="update-time-column">
+      Time of update
+    </div>
+    <div class="update-time-column">
+      Time of update
+    </div>
+  </div>
+{% endfor %}
+  <!-- {% for obj in user_objects %}
+    <div class="name-column-inside">
+      <a href="{% url 'update_note' user_id=user_id title=obj.title note_id=obj.id %}">{{obj.title}}</a>
+    </div>
+    <div class="creation-time-column-inside">
+      {{obj.create}}
+    </div>
+    <div class="update-time-column-inside">
+      {{obj.update}}
+    </div>
+  {% endfor %}
+</div> -->
 
 {% for obj in user_objects %}
 <a href="{% url 'update_note' user_id=user_id title=obj.title note_id=obj.id %}"
