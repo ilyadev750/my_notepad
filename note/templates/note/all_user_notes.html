@@ -23,59 +23,23 @@ User notes
   </div>
 </div>
 
-<div class="notes-table">
-  <div class="column-name">
-    Name
-  </div>
-  <div class="creation-time-column">
-    Time of creation
-  </div>
-  <div class="update-time-column">
-    Time of update
-  </div>
-</div>
-{% for obj in user_objects %}
-  <div class="notes-table">
-    <div class="column-name">
-      Name
-    </div>
-    <div class="creation-time-column">
-      Time of creation
-    </div>
-    <div class="update-time-column">
-      Time of update
-    </div>
-    <div class="update-time-column">
-      Time of update
-    </div>
-  </div>
-{% endfor %}
-  <!-- {% for obj in user_objects %}
-    <div class="name-column-inside">
-      <a href="{% url 'update_note' user_id=user_id title=obj.title note_id=obj.id %}">{{obj.title}}</a>
-    </div>
-    <div class="creation-time-column-inside">
-      {{obj.create}}
-    </div>
-    <div class="update-time-column-inside">
-      {{obj.update}}
-    </div>
+<table id="notes-table">
+  <tr>
+    <th>Name</th>
+    <th>Time of creation</th>
+    <th>Time of update</th>
+  </tr>
+  {% for obj in user_objects %}
+    <tr>
+      <th><a href="{% url 'update_note' user_id=user_id title=obj.title note_id=obj.id %}">
+        {{obj.title}}</a></th>
+      <th>{{obj.create}} </th>
+      <th>{{obj.update}} </th>
+    </tr>
   {% endfor %}
-</div> -->
-
-{% for obj in user_objects %}
-<a href="{% url 'update_note' user_id=user_id title=obj.title note_id=obj.id %}"
-  >{{obj.title}}</a
->
-{{obj.create}} {{obj.update}}
-<a href="{% url 'delete_note' user_id=user_id title=obj.title note_id=obj.id %}"
-  >Delete</a
->
-<br />
-{% endfor %}
+</table>
 <a href="{% url 'new_user_note' user_id=user_id type_of_note='new' %}"
   >Create new note</a
 >
-<br />
 
 {% endblock %}

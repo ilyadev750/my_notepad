@@ -1,16 +1,15 @@
-.notes-table {
+#notes-table {
   padding-top: 50px;
   font-family: 'Ubuntu', sans-serif;
-  font-size: 30px;
+  font-size: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.column-name, .creation-time-column, .update-time-column {
+#notes-table td, #notes-table th {
   padding: 10px 20px;
   width: 300px;
-  display: flex;
   align-items: center;
   justify-content: center;
   border-color: black;
@@ -18,9 +17,35 @@
   border-width: 3px;
 }
 
-.name-column-inside, .creation-time-column-inside, .update-time-column-inside {
-  display: inline-block;
-  /* align-items: center;
-  justify-content: center;
-  flex-direction: column; */
+button {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 20px;
+  text-align: center;
+  color: white;
+  padding: 10px 30px;
+  border-radius: 16px;
+  margin-top: 10px;
+  margin-left: 8px;
+  cursor: pointer;
 }
+
+button:hover {
+  background-color: white;
+  color: black;
+}
+
+button:active {
+  opacity: 0.7;
+}
+
+.new-note-button {
+  background-color: #21e707;
+}
+
+
+
+
+
+
+
+
