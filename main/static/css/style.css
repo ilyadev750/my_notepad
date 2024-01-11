@@ -612,3 +612,9 @@ a:focus {
 
 /* end footer section*/
 /*# sourceMappingURL=style.css.map */
+
+.img-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
