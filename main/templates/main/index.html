@@ -14,7 +14,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Fregg</title>
+  <title>Notepad</title>
 
   <!-- slider stylesheet -->
   <link rel="stylesheet" type="text/css"
@@ -41,7 +41,7 @@
     <header class="header_section">
       <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
-          <a class="navbar-brand mr-5" href="index.html">
+          <a class="navbar-brand mr-5" href="{% url 'home' %}">
             <img src={% static "images/logo.png" %} alt="">
             <span>
               NOTEPAD-ONLINE
@@ -55,10 +55,10 @@
             <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
               <ul class="navbar-nav  ">
                 <li class="nav-item active">
-                  <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="{% url 'home' %}" >Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="about.html"> About </a>
+                  <a class="nav-link" href="{% url 'about' %}" > About </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="service.html"> Login </a>
@@ -183,21 +183,38 @@
   <!-- end about section -->
 
   <!-- info section -->
-
-  <section class="info_section layout_padding">
-    <div class="footer_contact">
-      <div class="heading_container">
-        <h2>
-          Contact Us
-        </h2>
+  <div class="body_bg layout_padding">
+    <section class="contact_section">
+      <div class="container">
+        <div class="heading_container">
+          <h2>
+            Contact us
+          </h2>
+        </div>
       </div>
-      <div class="box">
-        <a href="" class="img-center">
-          <img src={% static "images/envelope.png" %} alt="" class="img-1">
-        </a>
+      <div class="container contact_bg layout_padding2-top">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="contact_form ">
+              <form action="">
+                <input type="text" placeholder="Name ">
+                <input type="email" placeholder="Email">
+                <input type="text" placeholder="Message" class="message_input">
+                <button>
+                  Send
+                </button>
+              </form>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="img-box">
+              <img src={% static "images/contact-img.jpg" %} alt="">
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 
 
   <!-- end info section -->

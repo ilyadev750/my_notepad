@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 
@@ -12,7 +14,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Fregg</title>
+  <title>About</title>
 
   <!-- slider stylesheet -->
   <link rel="stylesheet" type="text/css"
@@ -23,14 +25,14 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
   <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href={% static "css/bootstrap.css" %} />
 
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
   <!-- Custom styles for this template -->
-  <link href="css/style.css" rel="stylesheet" />
+  <link href={% static "css/style.css" %} rel="stylesheet" />
   <!-- responsive style -->
-  <link href="css/responsive.css" rel="stylesheet" />
+  <link href={% static "css/responsive.css" %} rel="stylesheet" />
 </head>
 
 <body class="sub_page">
@@ -39,10 +41,10 @@
     <header class="header_section">
       <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
-          <a class="navbar-brand mr-5" href="index.html">
-            <img src="images/logo.png" alt="">
+          <a class="navbar-brand mr-5" href="{% url 'home' %}">
+            <img src={% static "images/logo.png" %} alt="">
             <span>
-              Fregg
+              Notepad-online
             </span>
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -53,10 +55,10 @@
             <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
               <ul class="navbar-nav  ">
                 <li class="nav-item ">
-                  <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link" href="about.html"> About </a>
+                  <a class="nav-link" href="{% url 'about' %}"> About </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="service.html"> Service </a>
@@ -85,14 +87,13 @@
           <div class="detail-box">
             <div class="heading_container">
               <h2>
-                About Us
+                About 
               </h2>
             </div>
             <p>
-              It is a long established fact that a reader will be distracted by the readable content of a page when
-              looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of
-              letters, as opposed to using 'Content here, content here', making it look like readable English. Many
-              desktop publishing packages and web page editors now use Lorem Ipsum as their
+              This is a free online editor. You could use it without registration. Minimal interface
+              will help to concentrate on writing a note. After that the PDF format is avaliable for 
+              downloading.
             </p>
             <a href="">
               Get Started
@@ -111,31 +112,38 @@
 
   <!-- info section -->
 
-  <section class="info_section layout_padding">
-    <div class="footer_contact">
-      <div class="heading_container">
-        <h2>
-          Contact Us
-        </h2>
+  <div class="body_bg layout_padding">
+    <section class="contact_section">
+      <div class="container">
+        <div class="heading_container">
+          <h2>
+            Contact us
+          </h2>
+        </div>
       </div>
-      <div class="box">
-        <a href="" class="img-box">
-          <img src="images/location.png" alt="" class="img-1">
-          <img src="images/location-o.png" alt="" class="img-2">
-        </a>
-        <a href="" class="img-box">
-          <img src="images/call.png" alt="" class="img-1">
-          <img src="images/call-o.png" alt="" class="img-2">
-        </a>
-        <a href="" class="img-box">
-          <img src="images/envelope.png" alt="" class="img-1">
-          <img src="images/envelope-o.png" alt="" class="img-2">
-        </a>
+      <div class="container contact_bg layout_padding2-top">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="contact_form ">
+              <form action="">
+                <input type="text" placeholder="Name ">
+                <input type="email" placeholder="Email">
+                <input type="text" placeholder="Message" class="message_input">
+                <button>
+                  Send
+                </button>
+              </form>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="img-box">
+              <img src={% static "images/contact-img.jpg" %} alt="">
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-
-
-  </section>
+    </section>
+  </div>
 
 
   <!-- end info section -->
@@ -143,14 +151,13 @@
   <!-- footer section -->
   <section class="container-fluid footer_section">
     <p>
-      Copyright &copy; 2019 All Rights Reserved By
-      <a href="https://html.design/">Free Html Templates</a>
+      Copyright &copy; 2024 All Rights Reserved By
     </p>
   </section>
   <!-- footer section -->
 
-  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src={% static "js/jquery-3.4.1.min.js" %}></script>
+  <script type="text/javascript" src={% static "js/bootstrap.js" %}></script>
 
 </body>
 

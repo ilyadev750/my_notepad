@@ -8,8 +8,8 @@ from note.views import anonymous_note, about
 
 
 urlpatterns = [
-    path("", views.index, name="index"),
-    path("about/", about, name="about"),
+    path("", views.index, name="home"),
+    path("about/", views.about, name="about"),
     path("base/", anonymous_note, name="anonymous_note"),
     path("base/users/", include("users.urls")),
     path("admin/", admin.site.urls),
