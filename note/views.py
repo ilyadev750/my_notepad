@@ -45,7 +45,7 @@ def anonymous_note(request, *args, **kwargs):
             return HttpResponse(pdf, content_type="application/pdf")
 
     context = {"form": form}
-    return render(request, "note/editor.html", context)
+    return render(request, "note/note.html", context)
 
 
 def get_user_notes(request, *args, **kwargs):

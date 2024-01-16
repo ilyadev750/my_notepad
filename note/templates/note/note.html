@@ -14,7 +14,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>About</title>
+  <title>Editor</title>
 
   <!-- slider stylesheet -->
   <link rel="stylesheet" type="text/css"
@@ -42,7 +42,7 @@
       <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
           <a class="navbar-brand mr-5" href="{% url 'home' %}">
-            <img src={% static "images/logo.png" %} alt="">
+            <img src={% static "images/logo.png"%} alt="">
             <span>
               Notepad-online
             </span>
@@ -57,14 +57,14 @@
                 <li class="nav-item ">
                   <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                   <a class="nav-link" href="{% url 'about' %}"> About </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="service.html"> Login </a>
+                  <a class="nav-link" href=""> Login </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="contact.html">Registration</a>
+                <li class="nav-item active">
+                  <a class="nav-link" href=""> Registration </a>
                 </li>
               </ul>
               <form class="form-inline">
@@ -76,77 +76,47 @@
       </div>
     </header>
     <!-- end header section -->
+
   </div>
 
-  <!-- about section -->
-
-  <section class="about_section layout_padding">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="detail-box">
-            <div class="heading_container">
-              <h2>
-                About 
-              </h2>
-            </div>
-            <p>
-              This is a free online editor. You could use it without registration. Minimal interface
-              will help to concentrate on writing a note. After that the PDF format is avaliable for 
-              downloading.
-            </p>
-            <a href="{% url 'anonymous_note' %}">
-              Get Started
-            </a>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="img-box">
-            <img src="images/about-img.png" alt="">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- end about section -->
-
-  <!-- info section -->
+  {% block content %}
 
   <div class="body_bg layout_padding">
     <section class="contact_section">
-      <div class="container">
-        <div class="heading_container">
-          <h2>
-            Contact us
-          </h2>
-        </div>
-      </div>
-      <div class="container contact_bg layout_padding2-top">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="contact_form ">
-              <form action="">
-                <input type="text" placeholder="Name ">
-                <input type="email" placeholder="Email">
-                <input type="text" placeholder="Message" class="message_input">
-                <button>
-                  Send
-                </button>
-              </form>
-            </div>
+
+      <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %} 
+        {% for field in form %}
+          {% if field.is_hidden %}
+            {{ field }}
+          {% else %}
+            {# {{field.errors}} #}
+            <p>{{ field.label_tag }}</p>
+            <p>{{ field }}</p>
+          {% endif %}
+        {% endfor %}
+        {% if user.is_authenticated %}
+          <div>
+            <button class="save-button" type="submit" name="save">Save</button>
           </div>
-          <div class="col-md-6">
-            <div class="img-box">
-              <img src={% static "images/contact-img.jpg" %} alt="">
-            </div>
+        {% else %}
+          <div>
+            <button class="register-button" type="submit" name="register">Register</button>
+            <button class="login-button" type="submit" name="login">Login</button>
+            <button class="download-button" type="submit" name="download">Download</button>
           </div>
-        </div>
-      </div>
+        {% endif %}
+      </form>
     </section>
+    
   </div>
 
+  {% endblock %}
 
-  <!-- end info section -->
+  <div class="body_bg layout_padding">
+  </div> 
+
+
 
   <!-- footer section -->
   <section class="container-fluid footer_section">
