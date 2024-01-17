@@ -1,0 +1,50 @@
+{% extends "users/base.html" %}
+{% load static %} 
+
+{% block title %} Registration {% endblock %}
+
+{% block content %}
+
+<div class="body_bg layout_padding">
+  <section class="contact_section">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          Registration
+        </h2>
+      </div>
+    </div>
+    <div class="my-container contact_bg layout_padding2-top">
+      {% comment %} <div class="row"> {% endcomment %}
+        <div class="col align-self-center">
+          <div class="contact_form">
+            <form action="" method="post" enctype="multipart/form-data">
+              {% csrf_token %} 
+                {% for field in form %}
+                  {{ field.errors }}
+                  <div class="fieldWrapper">
+                    {{ field.label_tag }}
+                  </div>
+                  <div class="fieldWrapper">
+                    {{ field }}
+                  </div>
+                  {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
+                  {% endif %}
+                {% endfor %}
+                <br/><br/>
+                <div>
+                  <button class="register-button" type="submit" name="register">Sign up</button>
+                </div>
+            </form>
+          </div>
+        </div>
+      {% comment %} </div> {% endcomment %}
+    </div>
+  </section>
+</div>
+<div class="body_bg layout_padding">
+</div> 
+
+{% endblock %}
+

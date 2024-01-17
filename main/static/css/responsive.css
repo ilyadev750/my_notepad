@@ -81,5 +81,9 @@
     .container {
         max-width: 1170px;
     }
+    .my-container {
+        max-width: 600px;
+        margin: auto;
+    }
 
 }

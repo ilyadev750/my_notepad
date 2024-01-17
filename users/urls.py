@@ -4,9 +4,9 @@ from note.views import new_user_note, get_user_notes, update_user_note, delete_u
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path("login_user/", login_user, name="login"),
-    path("logout_user/", logout_user, name="logout"),
-    path("register_user/", register_user, name="register"),
+    path("login/", login_user, name="login"),
+    # path("logout_user/", logout_user, name="logout"),
+    path("registration/", register_user, name="registration"),
     path(
         "password_reset/",
         auth_views.PasswordResetView.as_view(

@@ -30,7 +30,7 @@ def register_user(request, *args, **kwargs):
             return redirect("home")
     else:
         form = CustomUserCreationForm()
-    return render(request, "authenticate/register_user.html", {"form": form})
+    return render(request, "users/registration.html", {"form": form})
 
 
 def login_user(request, *args, **kwargs):
@@ -47,7 +47,7 @@ def login_user(request, *args, **kwargs):
         else:
             messages.success(request, ("There was an error, try again ..."))
             return redirect("login")
-    return render(request, "authenticate/login.html", {})
+    return render(request, "users/login.html", {})
 
 
 def logout_user(request, *args, **kwargs):

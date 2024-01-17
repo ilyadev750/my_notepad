@@ -1,134 +1,39 @@
-{% load static %}
+{% extends "note/base.html" %}
+{% load static %} 
 
-<!DOCTYPE html>
-<html>
+{% block title %} Note {% endblock %}
 
-<head>
-  <!-- Basic -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- Mobile Metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Site Metas -->
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
+{% block content %}
 
-  <title>Editor</title>
+<div class="body_bg layout_padding">
+  <section class="contact_section">
 
-  <!-- slider stylesheet -->
-  <link rel="stylesheet" type="text/css"
-    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
-
-
-  <!-- font wesome stylesheet -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-
-  <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href={% static "css/bootstrap.css" %} />
-
-  <!-- fonts style -->
-  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
-  <!-- Custom styles for this template -->
-  <link href={% static "css/style.css" %} rel="stylesheet" />
-  <!-- responsive style -->
-  <link href={% static "css/responsive.css" %} rel="stylesheet" />
-</head>
-
-<body class="sub_page">
-  <div class="hero_area">
-    <!-- header section strats -->
-    <header class="header_section">
-      <div class="container">
-        <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
-          <a class="navbar-brand mr-5" href="{% url 'home' %}">
-            <img src={% static "images/logo.png"%} alt="">
-            <span>
-              Notepad-online
-            </span>
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
-              <ul class="navbar-nav  ">
-                <li class="nav-item ">
-                  <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'about' %}"> About </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href=""> Login </a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link" href=""> Registration </a>
-                </li>
-              </ul>
-              <form class="form-inline">
-                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
-              </form>
-            </div>
-          </div>
-        </nav>
-      </div>
-    </header>
-    <!-- end header section -->
-
-  </div>
-
-  {% block content %}
-
-  <div class="body_bg layout_padding">
-    <section class="contact_section">
-
-      <form action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %} 
-        {% for field in form %}
-          {% if field.is_hidden %}
-            {{ field }}
-          {% else %}
-            {# {{field.errors}} #}
-            <p>{{ field.label_tag }}</p>
-            <p>{{ field }}</p>
-          {% endif %}
-        {% endfor %}
-        {% if user.is_authenticated %}
-          <div>
-            <button class="save-button" type="submit" name="save">Save</button>
-          </div>
+    <form action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %} 
+      {% for field in form %}
+        {% if field.is_hidden %}
+          {{ field }}
         {% else %}
-          <div>
-            <button class="register-button" type="submit" name="register">Register</button>
-            <button class="login-button" type="submit" name="login">Login</button>
-            <button class="download-button" type="submit" name="download">Download</button>
-          </div>
+          {# {{field.errors}} #}
+          <p>{{ field.label_tag }}</p>
+          <p>{{ field }}</p>
         {% endif %}
-      </form>
-    </section>
-    
-  </div>
-
-  {% endblock %}
-
-  <div class="body_bg layout_padding">
-  </div> 
-
-
-
-  <!-- footer section -->
-  <section class="container-fluid footer_section">
-    <p>
-      Copyright &copy; 2024 All Rights Reserved 
-    </p>
+      {% endfor %}
+      {% if user.is_authenticated %}
+        <div>
+          <button class="save-button" type="submit" name="save">Save</button>
+        </div>
+      {% else %}
+        <div>
+          <button class="register-button" type="submit" name="register">Register</button>
+          <button class="login-button" type="submit" name="login">Login</button>
+          <button class="download-button" type="submit" name="download">Download</button>
+        </div>
+      {% endif %}
+    </form>
   </section>
-  <!-- footer section -->
+  
+</div>
 
-  <script type="text/javascript" src={% static "js/jquery-3.4.1.min.js" %}></script>
-  <script type="text/javascript" src={% static "js/bootstrap.js" %}></script>
+{% endblock %}
 
-</body>
-
-</html>

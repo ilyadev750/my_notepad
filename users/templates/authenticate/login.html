@@ -9,43 +9,47 @@ Login
 {% endblock %}
 
 {% block content %} 
-<div class="notepad-container">
-  <img class="notepad-image" src="{% static 'users/img/updnotepad.png' %}">
+<div class="body_bg layout_padding">
+  <section class="contact_section">
+    <div class="notepad-container">
+      <img class="notepad-image" src="{% static 'users/img/updnotepad.png' %}">
+    </div>
+    <div class="login-container">
+      <p>Login to Notepad</p>
+    </div>
+    <div class="form-container">
+      <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+          <label>Username:</label>
+        </div>
+        <div>
+          <input
+          type="text"
+          name="username"
+          required
+        />
+        </div>
+        <div>
+          <label>Password:</label>
+        </div>
+        <div>
+          <input
+          type="password"
+          name="password"
+          required
+        />
+        </div>
+        <div class="button-container">
+          <button class="login-button" type="submit">Login</button>
+          <a class="forgot-password" href="{% url 'password_reset' %}">Forgot password? </a>
+        </div>
+      </form>
+    </div> 
+    <p class="create-user">
+      New user? <span><a class="create-user-link" href="{% url 'registration' %}">Create an account</a></span>
+    </p>
+  </section>
 </div>
-<div class="login-container">
-  <p>Login to Notepad</p>
-</div>
-<div class="form-container">
-  <form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div>
-      <label>Username:</label>
-    </div>
-    <div>
-      <input
-      type="text"
-      name="username"
-      required
-    />
-    </div>
-    <div>
-      <label>Password:</label>
-    </div>
-    <div>
-      <input
-      type="password"
-      name="password"
-      required
-    />
-    </div>
-    <div class="button-container">
-      <button class="login-button" type="submit">Login</button>
-      <a class="forgot-password" href="{% url 'password_reset' %}">Forgot password? </a>
-    </div>
-  </form>
-</div> 
-<p class="create-user">
-  New user? <span><a class="create-user-link" href="{% url 'register' %}">Create an account</a></span>
-</p>
 {% endblock %}
 

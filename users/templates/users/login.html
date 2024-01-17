@@ -1,0 +1,60 @@
+{% extends "users/base.html" %}
+{% load static %} 
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+
+<div class="body_bg layout_padding">
+  <section class="contact_section">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          Login
+        </h2>
+      </div>
+    </div>
+    <div class="my-container contact_bg layout_padding2-top">
+      <div class="col align-self-center">
+        <div class="contact_form">
+          <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+              <label>Username:</label>
+            </div>
+            <div>
+              <input
+              type="text"
+              name="username"
+              required
+            />
+            </div>
+            <div>
+              <label>Password:</label>
+            </div>
+            <div>
+              <input
+              type="password"
+              name="password"
+              required
+            />
+            </div>
+            <div class="box">
+              <button class="login-button" type="submit">Login</button>
+              <a href="{% url 'password_reset' %}">Forgot password? </a>
+            </div>
+          </form>
+          <p class="create-user">
+            New user? <span><a class="create-user-link" href="{% url 'registration' %}">Create an account</a></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="body_bg layout_padding">
+  </div> 
+  
+</div>
+
+{% endblock %}
+
