@@ -9,8 +9,7 @@ from note.views import anonymous_note, about
 
 urlpatterns = [
     path("", include("main.urls")),
-    path("notes/", include("note.urls")),
     path("", include("users.urls")),
-    path("base/users/", include("users.urls")),
+    path("notes/", include("note.urls")),
     path("admin/", admin.site.urls),
 ]

@@ -10,6 +10,7 @@ from .functions import (
 )
 from .forms import AnonymousNoteForm, UserCreateNoteForm, UserUpdateNoteForm
 from django.contrib.auth import logout
+from django.contrib.auth.models import User     
 from .models import Note
 
 
@@ -50,8 +51,9 @@ def anonymous_note(request, *args, **kwargs):
 
 def get_user_notes(request, *args, **kwargs):
     if request.user.is_authenticated:
-        user_objects = Note.objects.filter(username=request.user.username)
-        context = {"user_objects": user_objects, "user_id": request.user.id}
+        user_id = (User.objects.get(username=request.user.username)).id
+        user_objects = Note.objects.filter(username_id=user_id)
+        context = {"user_objects": user_objects, "username": request.user.username}
         return render(request, "note/all_user_notes.html", context)
 
 

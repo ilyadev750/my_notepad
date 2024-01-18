@@ -1,8 +1,5 @@
-{% extends 'base.html' %} 
+{% extends 'note/base.html' %} 
 {% load static %} 
-{% block css %}
-    <link rel="stylesheet" href="{% static 'note/css/all_user_notes.css' %}" />
-{% endblock %} 
 
 
 {% block title %}
@@ -11,35 +8,35 @@ User notes
 
 
 {% block content %} 
-<div class="navbar-custom">
-  <div class="navbar-custom-notepad">
-    <a class="main-name" href="{% url 'home' %}">Notepad</a>
-  </div>
-  <div class="navbar-custom-user">
-    <a href="#">{{ user }}</a>
-  </div>
-  <div class="navbar-custom-logout">
-    <a href="{% url 'logout' %}">Logout</a>
-  </div>
-</div>
 
-<table id="notes-table">
-  <tr>
-    <th>Name</th>
-    <th>Time of creation</th>
-    <th>Time of update</th>
-  </tr>
-  {% for obj in user_objects %}
+<div class="body_bg layout_padding">
+</div> 
+
+<table class="table table-striped table-hover table-bordered">
+  <thead>
     <tr>
-      <th><a href="{% url 'update_note' user_id=user_id title=obj.title note_id=obj.id %}">
-        {{obj.title}}</a></th>
-      <th>{{obj.create}} </th>
-      <th>{{obj.update}} </th>
+      <th class="font-weight-normal" scope="col">Title</th>
+      <th class="font-weight-normal" scope="col">Time of creation</th>
+      <th class="font-weight-normal" scope="col">Time of update</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
-  {% endfor %}
+  </thead>
+  <tbody>
+    {% for obj in user_objects %}
+    <tr>
+      <th class="font-weight-normal">{{obj.title}}</th>
+      <th class="font-weight-normal">{{obj.create}} </th>
+      <th class="font-weight-normal">{{obj.update}} </th>
+      <th class="font-weight-normal text-primary">Update</th>
+      <th class="font-weight-normal text-danger">Delete</th>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
-<a href="{% url 'new_user_note' user_id=user_id type_of_note='new' %}"
-  >Create new note</a
->
-
+<div class="body_bg layout_padding">
+</div> 
+<div class="body_bg layout_padding">
+</div> 
+  
 {% endblock %}
