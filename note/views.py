@@ -14,19 +14,6 @@ from django.contrib.auth.models import User
 from .models import Note
 
 
-def start(request, *args, **kwargs):
-    if request.user.is_authenticated:
-        return redirect("get_user_notes", request.user.id)
-    else:
-        context = {}
-        return render(request, "note/first.html", context)
-
-
-def about(request, *args, **kwargs):
-    context = {}
-    return render(request, "note/about.html", context)
-
-
 def anonymous_note(request, *args, **kwargs):
     data = prepare_data_for_form(request)
     form = AnonymousNoteForm(data)
@@ -58,15 +45,15 @@ def get_user_notes(request, *args, **kwargs):
 
 
 def new_user_note(request, *args, **kwargs):
-    if kwargs["type_of_note"] == "new":
-        request.session["title"] = ""
-        request.session["content"] = ""
+    request.session["title"] = ""
+    request.session["content"] = ""
 
     if request.user.is_authenticated:
         data = prepare_data_for_form(request)
         form = UserCreateNoteForm(data)
 
         if request.method == "POST":
+            user_id = (User.objects.get(username=request.user.username)).id
             form = UserCreateNoteForm(request.POST)
             empty_obj = Note()
             if form.is_valid():
@@ -76,24 +63,21 @@ def new_user_note(request, *args, **kwargs):
 
                 if "save" in request.POST:
                     filled_obj.save()
-                    return redirect("get_user_notes", request.user.id)
+                    return redirect("get_user_notes", request.user.username)
 
                 elif "download" in request.POST:
                     pdf = make_pdf(request)
                     return HttpResponse(pdf, content_type="application/pdf")
 
-                elif "logout" in request.POST:
-                    logout(request)
-                    return redirect("home")
-
-        context = {"form": form}
-        return render(request, "note/editor.html", context)
+        context = {"form": form, "username": request.user.username }
+        return render(request, "note/note.html", context)
 
 
 def update_user_note(request, *args, **kwargs):
     if request.user.is_authenticated:
+        user_id = (User.objects.get(username=kwargs['username'])).id
         current_user_object = Note.objects.get(
-            id=kwargs["note_id"], title=kwargs["title"]
+            username_id=user_id, slug=kwargs["slug"]
         )
         data = extract_data_from_object(current_user_object)
         form = UserUpdateNoteForm(data)
@@ -106,24 +90,21 @@ def update_user_note(request, *args, **kwargs):
 
             if "save" in request.POST:
                 current_user_object.save()
-                return redirect("get_user_notes", request.user.id)
+                return redirect("get_user_notes", request.user.username)
 
             elif "download" in request.POST:
                 pdf = make_pdf(request)
                 return HttpResponse(pdf, content_type="application/pdf")
-
-            elif "logout" in request.POST:
-                logout(request)
-                return redirect("home")
-
-        context = {"form": form}
-        return render(request, "note/editor.html", context)
+            
+        context = {"form": form, "username": request.user.username, "slug": current_user_object.slug}
+        return render(request, "note/note.html", context)
 
 
 def delete_user_note(request, *args, **kwargs):
     if request.user.is_authenticated:
+        user_id = (User.objects.get(username=kwargs['username'])).id
         current_user_object = Note.objects.get(
-            id=kwargs["note_id"], title=kwargs["title"]
+            username_id=user_id, slug=kwargs["slug"]
         )
         current_user_object.delete()
-        return redirect("get_user_notes", request.user.id)
+        return redirect("get_user_notes", request.user.username)

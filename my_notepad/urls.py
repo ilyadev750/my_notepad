@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from main import views
-from note.views import anonymous_note, about
+
 
 
 urlpatterns = [

@@ -28,12 +28,17 @@ User notes
       <th class="font-weight-normal">{{obj.title}}</th>
       <th class="font-weight-normal">{{obj.create}} </th>
       <th class="font-weight-normal">{{obj.update}} </th>
-      <th class="font-weight-normal text-primary">Update</th>
-      <th class="font-weight-normal text-danger">Delete</th>
+      <th class="font-weight-normal text-primary"><a href="{% url 'update_user_note' username obj.slug %}">Update</a></th> 
+      <th class="font-weight-normal text-danger"><a href="{% url 'delete_user_note' username obj.slug %}">Delete</a></th>
     </tr>
     {% endfor %}
   </tbody>
 </table>
+<div class="btn-box">
+  <a href="{% url 'new_user_note' username=username %}" class="btn-1">
+    New note
+  </a>
+</div>
 <div class="body_bg layout_padding">
 </div> 
 <div class="body_bg layout_padding">
