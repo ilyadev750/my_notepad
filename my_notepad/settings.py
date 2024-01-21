@@ -10,7 +10,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
+
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -36,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
+    "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "main",
@@ -50,7 +54,7 @@ INSTALLED_APPS = [
 #         "LOCATION": os.path.join(BASE_DIR, "cache_info"),
 #     }
 # }
-
+SITE_ID = 1
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -139,9 +143,20 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+
+
+# Настройка почты
+EMAIL_BACKEND = 'backend.email.EmailBackend'
 EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 CKEDITOR_CONFIGS = {
     'default': {
@@ -170,24 +185,18 @@ CKEDITOR_CONFIGS = {
             '/',
             {'name': 'styles', 'items': ['Styles', 'Format', 'Font', 'FontSize']},
             {'name': 'colors', 'items': ['TextColor', 'BGColor']},
-            {'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
+            {'name': 'tools', 'items': ['ShowBlocks']},
             {'name': 'about', 'items': ['About']},
             '/',  # put this to force next toolbar on new line
-            {'name': 'yourcustomtools', 'items': [
-                # put the name of your editor.ui.addButton here
-                'Preview',
-                'Maximize',
-
-            ]},
         ],
         'toolbar': 'YourCustomToolbarConfig',  # put selected toolbar config here
-        # 'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
-        # 'height': 291,
-        # 'width': '100%',
-        # 'filebrowserWindowHeight': 725,
-        # 'filebrowserWindowWidth': 940,
-        # 'toolbarCanCollapse': True,
-        # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
+        'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
+        'height': 291,
+        'width': '100%',
+        'filebrowserWindowHeight': 725,
+        'filebrowserWindowWidth': 940,
+        'toolbarCanCollapse': True,
+        'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
         'tabSpaces': 4,
         'extraPlugins': ','.join([
             'uploadimage', # the upload image feature

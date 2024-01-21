@@ -104,9 +104,15 @@
               will help to concentrate on writing a note. After that the PDF format is avaliable for 
               downloading.
             </p>
-            <a href="{% url 'anonymous_note' %}">
-              Get Started
+            {% if user.is_authenticated %}
+            <a href="{% url 'new_user_note' username=user.username %}" class="btn-1">
+              Get started
             </a>
+            {% else %}
+            <a href="{% url 'anonymous_note' %}" class="btn-1">  
+                Get started
+              </a>
+            {% endif %}
           </div>
         </div>
         <div class="col-md-6">
