@@ -1,14 +1,49 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView 
+from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView, PasswordChangeView
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.utils.datastructures import MultiValueDictKeyError
 
-
 from .forms import CustomUserCreationForm, UserForgotPasswordForm, UserSetNewPasswordForm
 
+
+class UserForgotPasswordView(SuccessMessageMixin, PasswordResetView):
+    form_class = UserForgotPasswordForm
+    template_name = 'users/password_reset.html'
+    success_url = reverse_lazy('password_reset_done')
+    success_message = 'Mail with instructions sent to your email!'
+    subject_template_name = 'users/password_subject_reset_mail.txt'
+    email_template_name = 'users/password_reset_mail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Request to the new password'
+        return context
+
+
+class UserPasswordResetConfirmView(SuccessMessageMixin, PasswordResetConfirmView):
+    form_class = UserSetNewPasswordForm
+    template_name = 'users/password_set_new.html'
+    success_url = reverse_lazy('password_reset_complete' )
+    success_message = 'Your password was sucessfully changed. Return to the website.'
+               
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Set the new password:'
+        return context
+    
+class UserPasswordChangeView(SuccessMessageMixin, PasswordChangeView):
+    form_class = UserSetNewPasswordForm
+    template_name = 'users/password_set_new.html'
+    success_url = reverse_lazy('password_change')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Set the new password:'
+        return context
+    
 
 def register_user(request, *args, **kwargs):
     if request.method == "POST":
@@ -48,30 +83,3 @@ def login_user(request, *args, **kwargs):
 def logout_user(request, *args, **kwargs):
     logout(request)
     return redirect("home")
-
-
-
-class UserForgotPasswordView(SuccessMessageMixin, PasswordResetView):
-    form_class = UserForgotPasswordForm
-    template_name = 'users/password_reset.html'
-    success_url = reverse_lazy('home')
-    success_message = 'Mail with instructions sent to your email!'
-    subject_template_name = 'users/password_subject_reset_mail.txt'
-    email_template_name = 'users/password_reset_mail.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Request to the new password'
-        return context
-
-
-class UserPasswordResetConfirmView(SuccessMessageMixin, PasswordResetConfirmView):
-    form_class = UserSetNewPasswordForm
-    template_name = 'users/password_set_new.html'
-    success_url = reverse_lazy('home')
-    success_message = 'Your password was sucessfully changed. Return to the website.'
-               
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Set the new password:'
-        return context

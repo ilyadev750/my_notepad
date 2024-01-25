@@ -35,6 +35,7 @@ CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 # Application definition
 
 INSTALLED_APPS = [
+    "users",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -44,7 +45,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "main",
     "note",
-    "users",
     "ckeditor",
 ]
 
