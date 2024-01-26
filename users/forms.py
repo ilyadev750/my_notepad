@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, SetPasswordForm
+from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, SetPasswordForm, AuthenticationForm
 from django.core.exceptions import ValidationError
 
 
@@ -54,6 +54,16 @@ class UserForgotPasswordForm(PasswordResetForm):
 
 class UserSetNewPasswordForm(SetPasswordForm):
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({
+                'class': 'form-control',
+                'autocomplete': 'off'
+            })
+
+class UserLoginForm(AuthenticationForm()):
+    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields:
