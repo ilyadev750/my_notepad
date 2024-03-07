@@ -1,15 +1,16 @@
 # from multiprocessing import context
-import re
 # from urllib import request
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView, PasswordChangeView
+from django.contrib.auth.views import (PasswordResetView,
+                                       PasswordResetConfirmView,
+                                       PasswordChangeView)
 from django.contrib.auth.forms import AuthenticationForm
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-from django.utils.datastructures import MultiValueDictKeyError
-from .forms import CustomUserCreationForm, UserForgotPasswordForm, UserSetNewPasswordForm
+from .forms import (CustomUserCreationForm, UserForgotPasswordForm,
+                    UserSetNewPasswordForm)
 
 
 class UserForgotPasswordView(SuccessMessageMixin, PasswordResetView):
@@ -26,16 +27,19 @@ class UserForgotPasswordView(SuccessMessageMixin, PasswordResetView):
         return context
 
 
-class UserPasswordResetConfirmView(SuccessMessageMixin, PasswordResetConfirmView):
+class UserPasswordResetConfirmView(SuccessMessageMixin,
+                                   PasswordResetConfirmView):
     form_class = UserSetNewPasswordForm
     template_name = 'users/password_set_new.html'
-    success_url = reverse_lazy('password_reset_complete' )
-    success_message = 'Your password was sucessfully changed. Return to the website.'
-               
+    success_url = reverse_lazy('password_reset_complete')
+    success_message = 'Your password was sucessfully changed. \
+                      Return to the website.'
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Set the new password:'
         return context
+
 
 class UserPasswordChangeView(SuccessMessageMixin, PasswordChangeView):
 
@@ -49,7 +53,8 @@ class UserPasswordChangeView(SuccessMessageMixin, PasswordChangeView):
         return context
 
     def get_success_url(self) -> str:
-        return reverse_lazy('password_change_done', kwargs={'username': self.request.user.username})
+        return reverse_lazy('password_change_done',
+                            kwargs={'username': self.request.user.username})
 
 
 def register_user(request, *args, **kwargs):

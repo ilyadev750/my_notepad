@@ -36,12 +36,16 @@ def anonymous_note(request, *args, **kwargs):
 
 
 def get_user_notes(request, *args, **kwargs):
+    username = request.user.username
     if request.user.is_authenticated:
-        user_id = (User.objects.get(username=request.user.username)).id
-        user_objects = Note.objects.filter(username_id=user_id)
+        # user_id = (User.objects.get(username=request.user.username)).id
+        # user_objects = Note.objects.filter(username_id=user_id)
+        user_objects = (
+            Note.objects.select_related('username_id')
+            .filter(username_id__username=username))
         context = {
             "user_objects": user_objects,
-            "username": request.user.username
+            "username": username
             }
         return render(request, "note/all_user_notes.html", context)
 

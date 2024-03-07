@@ -1,0 +1,182 @@
+[
+    {
+        "model": "note.note",
+        "pk": 1,
+        "fields": {
+            "title": "hello",
+            "content": "world",
+            "slug": "hello",
+            "create": "2024-01-18T17:04:14Z",
+            "update": "2024-01-19T15:25:40.669Z",
+            "username_id": 1
+        }
+    },
+    {
+        "model": "note.note",
+        "pk": 2,
+        "fields": {
+            "title": "we we",
+            "content": "we we",
+            "slug": "we-we",
+            "create": "2024-01-18T17:04:14Z",
+            "update": "2024-01-19T15:18:36.165Z",
+            "username_id": 1
+        }
+    },
+    {
+        "model": "note.note",
+        "pk": 3,
+        "fields": {
+            "title": "12999`",
+            "content": "12wwq",
+            "slug": "12",
+            "create": "2024-01-18T17:37:10Z",
+            "update": "2024-01-19T14:37:34.215Z",
+            "username_id": 1
+        }
+    },
+    {
+        "model": "note.note",
+        "pk": 4,
+        "fields": {
+            "title": "45",
+            "content": "45nnnnnnnn",
+            "slug": "45",
+            "create": "2024-01-18T17:37:10Z",
+            "update": "2024-01-19T14:28:44.558Z",
+            "username_id": 1
+        }
+    },
+    {
+        "model": "note.note",
+        "pk": 6,
+        "fields": {
+            "title": "00",
+            "content": "00",
+            "slug": "00",
+            "create": "2024-01-18T17:37:10Z",
+            "update": "2024-01-18T17:37:10Z",
+            "username_id": 1
+        }
+    },
+    {
+        "model": "note.note",
+        "pk": 7,
+        "fields": {
+            "title": "ww",
+            "content": "ww",
+            "slug": "www00",
+            "create": "2024-01-19T15:29:46Z",
+            "update": "2024-01-19T17:19:18.408Z",
+            "username_id": 1
+        }
+    },
+    {
+        "model": "note.note",
+        "pk": 8,
+        "fields": {
+            "title": "wwwww",
+            "content": "ww",
+            "slug": "www",
+            "create": "2024-01-19T15:31:27Z",
+            "update": "2024-01-19T15:41:17.406Z",
+            "username_id": 1
+        }
+    },
+    {
+        "model": "note.note",
+        "pk": 9,
+        "fields": {
+            "title": "43",
+            "content": "<p><span style=\"font-family:Times New Roman,Times,serif\">sadasdadsasd</span></p>",
+            "slug": "43",
+            "create": "2024-01-19T16:25:11Z",
+            "update": "2024-01-19T16:25:11Z",
+            "username_id": 1
+        }
+    },
+    {
+        "model": "note.note",
+        "pk": 16,
+        "fields": {
+            "title": "Приветик",
+            "content": "<blockquote>\r\n<p><span style=\"background-color:#e74c3c\">привет</span><img alt=\"\" src=\"https://yandex.com/images/search?from=tabbar&amp;img_url=https%3A%2F%2Fres.cloudinary.com%2Fpracticaldev%2Fimage%2Ffetch%2Fs--XC360QdO--%2Fc_imagga_scale%2Cf_auto%2Cfl_progressive%2Ch_500%2Cq_auto%2Cw_1000%2Fhttps%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F76ug8asr3azb3hafbyas.jpeg&amp;lr=10522&amp;p=1&amp;pos=16&amp;rpt=simage&amp;text=django-ckeditor\" />asdad</p>\r\n</blockquote>\r\n\r\n<p>asdsad</p>\r\n\r\n<p>asdhgfgh</p>",
+            "slug": "privetikWbO0xDFi",
+            "create": "2024-01-19T17:04:30Z",
+            "update": "2024-01-20T15:55:50.067Z",
+            "username_id": 2
+        }
+    },
+    {
+        "model": "note.note",
+        "pk": 19,
+        "fields": {
+            "title": "asd",
+            "content": "<p><img alt=\"\" src=\"https://www.serbia-home.com/wp-content/uploads/2024/01/419131296_10233263633079544_6432290479694451852_n-520x245.jpg\" style=\"height:400px; margin-left:1px; margin-right:1px; width:849px\" />sad</p>",
+            "slug": "asdxrkHFdN1",
+            "create": "2024-01-19T17:22:02Z",
+            "update": "2024-01-19T17:22:02Z",
+            "username_id": 1
+        }
+    },
+    {
+        "model": "note.note",
+        "pk": 21,
+        "fields": {
+            "title": "awewaeeaw",
+            "content": "<p><span style=\"font-size:72px\"><span style=\"font-family:Times New Roman,Times,serif\"><img alt=\"\" src=\"https://avatars.mds.yandex.net/i?id=b9a5dd3415b9346d0967a5944f60911684648eff-5225319-images-thumbs&amp;n=13\" style=\"height:525px; width:700px\" /></span></span></p>\r\n\r\n<p><span style=\"font-size:72px\"><span style=\"font-family:Times New Roman,Times,serif\">fluffy cat</span></span></p>",
+            "slug": "awewaeeawFIcep1Ou",
+            "create": "2024-01-20T15:37:47Z",
+            "update": "2024-01-20T16:46:56.563Z",
+            "username_id": 1
+        }
+    },
+    {
+        "model": "note.note",
+        "pk": 22,
+        "fields": {
+            "title": "awdid",
+            "content": "<p>1111</p>",
+            "slug": "awdidXCwu3rQP",
+            "create": "2024-01-20T20:07:36.707Z",
+            "update": "2024-01-20T20:07:36.707Z",
+            "username_id": 1
+        }
+    },
+    {
+        "model": "note.note",
+        "pk": 23,
+        "fields": {
+            "title": "Мое первое тестовое задание",
+            "content": "<h3>Тестовое задание MirGovorit backend</h3>\r\n\r\n<p>Нужно разработать небольшое приложение поварской книги на Django, со следующим функционалом:</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h3>База данных</h3>\r\n\r\n<p>В базе данных приложения должен храниться список продуктов. Продукт имеет название, а также целочисленное поле, хранящее информацию о том, сколько раз было приготовлено блюдо с использованием этого продукта. Также в базе данных хранятся рецепты блюд. Рецепт имеет название, а также набор входящих в рецепт продуктов, с указанием веса в граммах.</p>\r\n\r\n<p>Например - рецепт Сырник, в который входят продукты Творог 200г, Яйцо 50г, Сахар 10г.</p>\r\n\r\n<p>Один и тот же продукт, может использоваться в разных рецептах. Один и тот же продукт не может быть использован в одном рецепте дважды.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h3>Функционал</h3>\r\n\r\n<p>Приложение должно предоставлять следующие HTTP функции, получающие параметры методом GET</p>\r\n\r\n<p>1.&nbsp; &nbsp; &nbsp; &nbsp;add_product_to_recipe с параметрами recipe_id, product_id, weight. Функция добавляет к указанному рецепту указанный продукт с указанным весом. Если в рецепте уже есть такой продукт, то функция должна поменять его вес в этом рецепте на указанный.</p>\r\n\r\n<p>2.&nbsp; &nbsp; &nbsp; &nbsp;cook_recipe c параметром recipe_id. Функция увеличивает на единицу количество приготовленных блюд для каждого продукта, входящего в указанный рецепт.</p>\r\n\r\n<p>3.&nbsp; &nbsp; &nbsp; &nbsp;show_recipes_without_product с параметром product_id. Функция возвращает HTML страницу, на которой размещена таблица. В таблице отображены id и названия всех рецептов, в которых указанный продукт отсутствует, или присутствует в количестве меньше 10 грамм. Страница должна генерироваться с использованием Django templates. Качество HTML верстки не оценивается.</p>\r\n\r\n<p>Важно:&nbsp;указанные функции должны быть реализованы в разумной степени эффективно с точки зрения производительности, а также корректно работать в случае одновременного доступа нескольких пользователей.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h3>Админка</h3>\r\n\r\n<p>Также средствами Джанго должна быть настроена админка, где пользователь сможет управлять входящими в базу данных продуктами и рецептами. Для рецептов должна быть возможность редактировать входящие в их состав продукты и их вес в граммах.</p>",
+            "slug": "moe-pervoe-testovoe-zadanie3dXjWV7d",
+            "create": "2024-01-27T00:07:28.607Z",
+            "update": "2024-01-27T00:07:28.607Z",
+            "username_id": 1
+        }
+    },
+    {
+        "model": "note.note",
+        "pk": 24,
+        "fields": {
+            "title": "таблицы в БД",
+            "content": "<p>1. Продукты</p>\r\n\r\n<p>Колонки: идентификатор, название продукта(уникальное), количество приготовлений</p>\r\n\r\n<p>2. Рецепт</p>\r\n\r\n<p>Колонки: идентификатор, название(уникальное), слаг</p>\r\n\r\n<p>3. Количество ингредиентов в рецепте</p>\r\n\r\n<p>Колонки: внешний ключ на таблицу рецепты, внешний ключ на таблицу продукты, количество в граммах</p>",
+            "slug": "tablitsyi-v-bdZbaqj7JZ",
+            "create": "2024-01-28T18:05:04.611Z",
+            "update": "2024-01-28T23:30:51.833Z",
+            "username_id": 1
+        }
+    },
+    {
+        "model": "note.note",
+        "pk": 25,
+        "fields": {
+            "title": "Декабрь-Январь траты рестораны-кафе",
+            "content": "<p>Декабрь</p>\r\n\r\n<p>Бургеры/рестораны: &nbsp;1585,1994,1650,1320,1565,1975,1395,2340,1640,2500,2744,2700,2290,965,1315,2230,2100,1800,3155,1585,1245,2175,1600,1585,1540,1350,1485,1585,1810,2400 - 55623 динаров</p>\r\n\r\n<p>Кафе: 785, 1140,310,640,1800,740,800,1970,750 - 8935 динаров</p>\r\n\r\n<p>Январь</p>\r\n\r\n<p>Бургеры/рестораны</p>\r\n\r\n<p>1135,2175,2805,3830,3890,1500,1540,1710,1695,1525,2160,780,2300,2200,1568,3300,2330,2175,2000,3234,2380,1520,2624,2130,2420,3200</p>\r\n\r\n<p>58126 динаров</p>\r\n\r\n<p>Кафе</p>\r\n\r\n<p>865,1027,1010,2100,980,855,900,1950,860,1710,480 - 12737 динаров</p>\r\n\r\n<p>Февраль</p>\r\n\r\n<p>Рестораны, кафе&nbsp;</p>\r\n\r\n<p>на 4 феварля</p>\r\n\r\n<p>3234,2653,450,1565,4600,670,3445 - 16617 динаров&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>",
+            "slug": "dekabr-yanvar-tratyi-restoranyi-kafezaZR8s5X",
+            "create": "2024-02-04T20:06:32.477Z",
+            "update": "2024-02-04T20:22:57.676Z",
+            "username_id": 1
+        }
+    }
+]
