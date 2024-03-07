@@ -1,6 +1,4 @@
-from .models import Note
 from django import forms
-from django.utils import timezone
 from ckeditor.widgets import CKEditorWidget
 
 
@@ -21,7 +19,8 @@ class AnonymousNoteForm(forms.Form):
 
 class UserCreateNoteForm(forms.Form):
     title = forms.CharField(
-        max_length=255, widget=forms.TextInput(attrs={"class": "form-content-title"})
+        max_length=255,
+        widget=forms.TextInput(attrs={"class": "form-content-title"})
     )
     content = forms.CharField(widget=CKEditorWidget())
     create = forms.DateTimeField(widget=forms.HiddenInput())

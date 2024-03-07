@@ -1,6 +1,6 @@
-from multiprocessing import context
+# from multiprocessing import context
 import re
-from urllib import request
+# from urllib import request
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView, PasswordChangeView
@@ -9,7 +9,6 @@ from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.utils.datastructures import MultiValueDictKeyError
-
 from .forms import CustomUserCreationForm, UserForgotPasswordForm, UserSetNewPasswordForm
 
 
@@ -37,9 +36,9 @@ class UserPasswordResetConfirmView(SuccessMessageMixin, PasswordResetConfirmView
         context = super().get_context_data(**kwargs)
         context['title'] = 'Set the new password:'
         return context
-    
+
 class UserPasswordChangeView(SuccessMessageMixin, PasswordChangeView):
-    
+
     form_class = UserSetNewPasswordForm
     template_name = 'users/password_set_new.html'
     success_message = 'Your password was sucessfully changed!'
@@ -48,11 +47,11 @@ class UserPasswordChangeView(SuccessMessageMixin, PasswordChangeView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Set the new password:'
         return context
-    
+
     def get_success_url(self) -> str:
         return reverse_lazy('password_change_done', kwargs={'username': self.request.user.username})
-    
-    
+
+
 def register_user(request, *args, **kwargs):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
@@ -68,6 +67,7 @@ def register_user(request, *args, **kwargs):
         form = CustomUserCreationForm()
     return render(request, "users/registration.html", {"form": form})
 
+
 def login_user(request, *args, **kwargs):
     if request.method == "POST":
         username = request.POST["username"]
@@ -78,11 +78,15 @@ def login_user(request, *args, **kwargs):
             return redirect("get_user_notes", request.user.username)
         else:
             form = AuthenticationForm()
-            context = {"form": form, "error": 'Invalid login or password, try again!'}
+            context = {
+                "form": form,
+                "error": 'Invalid login or password, try again!'
+                }
             return render(request, "users/login.html", context)
     else:
         form = AuthenticationForm()
     return render(request, "users/login.html", {"form": form, "error": ''})
+
 
 def logout_user(request, *args, **kwargs):
     logout(request)

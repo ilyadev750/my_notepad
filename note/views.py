@@ -9,8 +9,7 @@ from .functions import (
     make_pdf,
 )
 from .forms import AnonymousNoteForm, UserCreateNoteForm, UserUpdateNoteForm
-from django.contrib.auth import logout
-from django.contrib.auth.models import User     
+from django.contrib.auth.models import User
 from .models import Note
 
 
@@ -40,7 +39,10 @@ def get_user_notes(request, *args, **kwargs):
     if request.user.is_authenticated:
         user_id = (User.objects.get(username=request.user.username)).id
         user_objects = Note.objects.filter(username_id=user_id)
-        context = {"user_objects": user_objects, "username": request.user.username}
+        context = {
+            "user_objects": user_objects,
+            "username": request.user.username
+            }
         return render(request, "note/all_user_notes.html", context)
 
 
@@ -53,7 +55,6 @@ def new_user_note(request, *args, **kwargs):
         form = UserCreateNoteForm(data)
 
         if request.method == "POST":
-            user_id = (User.objects.get(username=request.user.username)).id
             form = UserCreateNoteForm(request.POST)
             empty_obj = Note()
             if form.is_valid():
@@ -69,7 +70,10 @@ def new_user_note(request, *args, **kwargs):
                     pdf = make_pdf(request)
                     return HttpResponse(pdf, content_type="application/pdf")
 
-        context = {"form": form, "username": request.user.username }
+        context = {
+            "form": form,
+            "username": request.user.username
+            }
         return render(request, "note/note.html", context)
 
 
@@ -84,7 +88,8 @@ def update_user_note(request, *args, **kwargs):
         if request.method == "POST":
             form = UserUpdateNoteForm(request.POST)
             if form.is_valid():
-                current_user_object, request = add_info_in_current_object_and_session(
+                current_user_object,
+                request = add_info_in_current_object_and_session(
                     current_user_object, form, request
                 )
 
@@ -95,8 +100,12 @@ def update_user_note(request, *args, **kwargs):
             elif "download" in request.POST:
                 pdf = make_pdf(request)
                 return HttpResponse(pdf, content_type="application/pdf")
-            
-        context = {"form": form, "username": request.user.username, "slug": current_user_object.slug}
+
+        context = {
+            "form": form,
+            "username": request.user.username,
+            "slug": current_user_object.slug
+            }
         return render(request, "note/note.html", context)
 
 
