@@ -5,6 +5,7 @@ services:
         container_name: django
         build: 
             context: .
+            no_cache: true
         command: python manage.py runserver 0.0.0.0:8000
         volumes:
             - .:/app/my_notepad
@@ -13,4 +14,20 @@ services:
         environment:
             - DEBUG=${DEBUG}
             - SECRET_KEY=${SECRET_KEY}
-            - ALLOWED_HOSTS=${ALLOWED_HOSTS} 
+            - ALLOWED_HOSTS=${ALLOWED_HOSTS}.split(',') 
+        depends_on:
+            - pgdb
+
+    pgdb:
+        image: postgres:15.4-alpine
+        build: 
+            no_cache: true
+        environment:
+            - POSTGRES_DB=${POSTGRES_DB}
+            - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+        container_name: pgdb
+        ports:
+            - "5433:5432"
+        volumes:
+            - /Users/ilyapetrov/notepad_db:/var/lib/postgresql/data
