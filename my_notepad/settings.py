@@ -1,16 +1,13 @@
 import os
-from dotenv import load_dotenv
 from pathlib import Path
-
-load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
-DEBUG = os.getenv('DEBUG')
+DEBUG = bool(os.environ.get('DEBUG', default=0))
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(",")
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(",")
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
@@ -69,21 +66,24 @@ TEMPLATES = [
 WSGI_APPLICATION = "my_notepad.wsgi.application"
 
 
-
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv('POSTGRES_DB'),
-        "USER": os.getenv('POSTGRES_USER'),
-        "PASSWORD": os.getenv('POSTGRES_PASSWORD'),
-        "HOST": os.getenv('HOST'), 
-        "PORT": os.getenv('PORT'), 
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": os.environ.get('POSTGRES_DB'),
+        "USER": os.environ.get('POSTGRES_USER'),
+        "PASSWORD": os.environ.get('POSTGRES_PASSWORD'),
+        "HOST": 'db', 
+        "PORT": '5432', 
     }
 }
-
-
 
 
 

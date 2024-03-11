@@ -1,33 +1,30 @@
 version: '3.8'
 
 services:
-    django:
-        container_name: django
-        build: 
-            context: .
-            no_cache: true
-        command: python manage.py runserver 0.0.0.0:8000
-        volumes:
-            - .:/app/my_notepad
-        ports:
-            - 8001:8000
-        environment:
-            - DEBUG=${DEBUG}
-            - SECRET_KEY=${SECRET_KEY}
-            - ALLOWED_HOSTS=${ALLOWED_HOSTS}.split(',') 
-        depends_on:
-            - pgdb
 
-    pgdb:
-        image: postgres:15.4-alpine
-        build: 
-            no_cache: true
-        environment:
-            - POSTGRES_DB=${POSTGRES_DB}
-            - POSTGRES_USER=${POSTGRES_USER}
-            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-        container_name: pgdb
-        ports:
-            - "5433:5432"
-        volumes:
-            - /Users/ilyapetrov/notepad_db:/var/lib/postgresql/data
+  django:
+    container_name: django
+    build: 
+      context: .
+      no_cache: true
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/usr/src/app/
+    env_file:
+      - ./.env
+    ports:
+      - 8001:8000
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15.4
+    container_name: db
+    ports:
+      - 5435:5432
+    env_file:
+      - ./.env
+    volumes:
+      - /Users/ilyapetrov/notepad_db:/var/lib/postgresql/data  
+
+    

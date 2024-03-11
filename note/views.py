@@ -6,7 +6,7 @@ from .functions import (
     add_info_in_session,
     extract_data_from_object,
     add_info_in_current_object_and_session,
-    make_pdf,
+    # make_pdf,
 )
 from .forms import AnonymousNoteForm, UserCreateNoteForm, UserUpdateNoteForm
 from django.contrib.auth.models import User
@@ -28,8 +28,9 @@ def anonymous_note(request, *args, **kwargs):
             return redirect("register")
 
         elif "download" in request.POST:
-            pdf = make_pdf(request)
-            return HttpResponse(pdf, content_type="application/pdf")
+            pass
+            # pdf = make_pdf(request)
+            # return HttpResponse(pdf, content_type="application/pdf")
 
     context = {"form": form}
     return render(request, "note/note.html", context)
@@ -71,8 +72,9 @@ def new_user_note(request, *args, **kwargs):
                     return redirect("get_user_notes", request.user.username)
 
                 elif "download" in request.POST:
-                    pdf = make_pdf(request)
-                    return HttpResponse(pdf, content_type="application/pdf")
+                    pass
+                    # pdf = make_pdf(request)
+                    # return HttpResponse(pdf, content_type="application/pdf")
 
         context = {
             "form": form,
@@ -92,18 +94,18 @@ def update_user_note(request, *args, **kwargs):
         if request.method == "POST":
             form = UserUpdateNoteForm(request.POST)
             if form.is_valid():
-                current_user_object,
-                request = add_info_in_current_object_and_session(
+                current_user_object, request = add_info_in_current_object_and_session(
                     current_user_object, form, request
                 )
+                
+                if "save" in request.POST:
+                    current_user_object.save()
+                    return redirect("get_user_notes", request.user.username)
 
-            if "save" in request.POST:
-                current_user_object.save()
-                return redirect("get_user_notes", request.user.username)
-
-            elif "download" in request.POST:
-                pdf = make_pdf(request)
-                return HttpResponse(pdf, content_type="application/pdf")
+                elif "download" in request.POST:
+                    pass
+                    # pdf = make_pdf(request)
+                    # return HttpResponse(pdf, content_type="application/pdf")
 
         context = {
             "form": form,
