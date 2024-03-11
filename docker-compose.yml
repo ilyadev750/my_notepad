@@ -2,6 +2,9 @@ version: '3.8'
 
 services:
 
+  redis:
+    image: redis:7.0.11-alpine
+
   django:
     container_name: django
     build: 
@@ -15,6 +18,23 @@ services:
     ports:
       - 8001:8000
     depends_on:
+      - redis
+      - db
+
+  celery:
+    container_name: celery
+    build: 
+      context: ./dcelery
+      no_cache: true
+    volumes:
+      - .:/usr/src/app/
+    env_file:
+      - ./.env
+    ports:
+      - 8001:8000
+    depends_on:
+      - django
+      - redis
       - db
 
   db:
