@@ -24,15 +24,14 @@ services:
   celery:
     container_name: celery
     build: 
-      context: ./dcelery
+      context: .
       no_cache: true
+    command: celery --app=my_notepad worker -l INFO
     volumes:
       - .:/usr/src/app/
     env_file:
       - ./.env
-    ports:
-      - 8001:8000
-    depends_on:
+    depends_on: 
       - django
       - redis
       - db

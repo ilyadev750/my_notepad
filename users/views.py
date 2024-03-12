@@ -34,7 +34,7 @@ class UserPasswordResetConfirmView(SuccessMessageMixin,
     success_url = reverse_lazy('password_reset_complete')
     success_message = 'Your password was sucessfully changed. \
                       Return to the website.'
-
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Set the new password:'

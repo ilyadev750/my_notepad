@@ -33,6 +33,7 @@ INSTALLED_APPS = [
 #         "LOCATION": os.path.join(BASE_DIR, "cache_info"),
 #     }
 # }
+
 SITE_ID = 1
 
 MIDDLEWARE = [
@@ -189,3 +190,7 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
+
+
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER', "redis://redis:6379/0")
+CELERY_RESULT_BACKEND = os.environ.get('CELERY_BACKEND', "redis://redis:6379/0")
