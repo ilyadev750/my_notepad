@@ -46,7 +46,7 @@ class UserPasswordChangeView(SuccessMessageMixin, PasswordChangeView):
     form_class = UserSetNewPasswordForm
     template_name = 'users/password_set_new.html'
     success_message = 'Your password was sucessfully changed!'
-
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Set the new password:'
