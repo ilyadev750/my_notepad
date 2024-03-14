@@ -22,17 +22,18 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'django.contrib.postgres',
+    "debug_toolbar",
     "main",
     "note",
     "ckeditor",
 ]
 
-# CACHES = {
-#     "default": {
-#         "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
-#         "LOCATION": os.path.join(BASE_DIR, "cache_info"),
-#     }
-# }
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://redis:6379",
+    }
+}
 
 SITE_ID = 1
 
@@ -42,6 +43,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -194,3 +196,9 @@ CKEDITOR_CONFIGS = {
 
 CELERY_BROKER_URL = os.environ.get('CELERY_BROKER', "redis://redis:6379/0")
 CELERY_RESULT_BACKEND = os.environ.get('CELERY_BACKEND', "redis://redis:6379/0")
+
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
+]

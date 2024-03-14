@@ -4,6 +4,7 @@ from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
+    path("__debug__/", include("debug_toolbar.urls")),
     path("", include("main.urls")),
     path("", include("users.urls")),
     path("notes/", include("note.urls")),

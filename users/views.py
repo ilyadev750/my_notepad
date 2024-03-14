@@ -20,7 +20,7 @@ class UserForgotPasswordView(SuccessMessageMixin, PasswordResetView):
     success_message = 'Mail with instructions sent to your email!'
     subject_template_name = 'users/password_subject_reset_mail.txt'
     email_template_name = 'users/password_reset_mail.html'
-
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Request to the new password'

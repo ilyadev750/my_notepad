@@ -1,4 +1,5 @@
-from django.http import HttpResponse
+from socket import timeout
+import redis
 from django.shortcuts import render, redirect
 from .functions import (
     prepare_data_for_form,
@@ -11,6 +12,9 @@ from .functions import (
 from .forms import AnonymousNoteForm, UserCreateNoteForm, UserUpdateNoteForm
 from django.contrib.auth.models import User
 from .models import Note
+
+
+r = redis.Redis(host='redis', port=6379, decode_responses=True)
 
 
 def anonymous_note(request, *args, **kwargs):
@@ -37,6 +41,13 @@ def anonymous_note(request, *args, **kwargs):
 
 
 def get_user_notes(request, *args, **kwargs):
+    name = r.get('username')
+    print('1')
+    if name:
+        print(name)
+    else:
+        r.setex('username', 5, request.user.username)
+        print('Cached!')
     username = request.user.username
     if request.user.is_authenticated:
         # user_id = (User.objects.get(username=request.user.username)).id

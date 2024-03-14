@@ -60,7 +60,7 @@ class UserForgotPasswordForm(PasswordResetFormCore):
                   from_email, to_email, html_email_template_name=None):
         context['user'] = context['user'].id
 
-        send_mail(subject_template_name=subject_template_name, 
+        send_mail.delay(subject_template_name=subject_template_name, 
                     email_template_name=email_template_name,
                     context=context, from_email=from_email, to_email=to_email,
                     html_email_template_name=html_email_template_name)
