@@ -1,4 +1,5 @@
 import os
+import socket
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,6 +39,7 @@ CACHES = {
 SITE_ID = 1
 
 MIDDLEWARE = [
+    'django.middleware.cache.UpdateCacheMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -46,6 +48,7 @@ MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 ROOT_URLCONF = "my_notepad.urls"
@@ -197,8 +200,16 @@ CKEDITOR_CONFIGS = {
 CELERY_BROKER_URL = os.environ.get('CELERY_BROKER', "redis://redis:6379/0")
 CELERY_RESULT_BACKEND = os.environ.get('CELERY_BACKEND', "redis://redis:6379/0")
 
-INTERNAL_IPS = [
-    # ...
-    "127.0.0.1",
-    # ...
-]
+# INTERNAL_IPS = [
+#     # ...
+#     "172.19.0.1",
+#     "127.0.0.1",
+#     # ...
+# ]
+def show_toolbar_callback(*args, **kwargs):
+    return True
+
+hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+INTERNAL_IPS = [ip[:-1] + '1' for ip in ips] + ['127.0.0.1', '172.19.0.1']
+
+DEBUG_TOOLBAR_CONFIG = {"SHOW_TOOLBAR_CALLBACK": show_toolbar_callback}

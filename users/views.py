@@ -1,5 +1,3 @@
-# from multiprocessing import context
-# from urllib import request
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import (PasswordResetView,

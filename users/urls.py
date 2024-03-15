@@ -1,5 +1,4 @@
 from django.urls import path
-# from note.views import new_user_note, get_user_notes, update_user_note, delete_user_note
 from django.contrib.auth.views import (PasswordResetDoneView,
                                        PasswordResetCompleteView,
                                        PasswordChangeDoneView)

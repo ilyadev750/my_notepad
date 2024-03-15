@@ -1,4 +1,6 @@
 from socket import timeout
+from django.views.decorators.cache import cache_page
+from django.db.models import Q
 import redis
 from django.shortcuts import render, redirect
 from .functions import (
@@ -14,7 +16,7 @@ from django.contrib.auth.models import User
 from .models import Note
 
 
-r = redis.Redis(host='redis', port=6379, decode_responses=True)
+r_cache = redis.Redis(host='redis', port=6379, decode_responses=True)
 
 
 def anonymous_note(request, *args, **kwargs):
@@ -39,25 +41,36 @@ def anonymous_note(request, *args, **kwargs):
     context = {"form": form}
     return render(request, "note/note.html", context)
 
-
+@cache_page(7)
 def get_user_notes(request, *args, **kwargs):
-    name = r.get('username')
-    print('1')
-    if name:
-        print(name)
-    else:
-        r.setex('username', 5, request.user.username)
-        print('Cached!')
+    # два словаря - один с ключом пользователя и значениями слагов заметок
+    # второй словарь - ключ - слаг заметки, значения вся инфа из него
+
+
+
+    # name = r_cache.hget('username', 'username')
+    # age = r_cache.hget('username', 'age')
+    # if name:
+    #     print(name)
+    #     print(age)
+    # else:
+    #     print('Set name')
+    #     r_cache.hset('username', 'username', request.user.username)
+    #     r_cache.hset('username', 'age', 30)
+    #     r_cache.expire('username', 5)
     username = request.user.username
     if request.user.is_authenticated:
-        # user_id = (User.objects.get(username=request.user.username)).id
-        # user_objects = Note.objects.filter(username_id=user_id)
-        user_objects = (
-            Note.objects.select_related('username_id')
-            .filter(username_id__username=username))
+        
+        query_1 = Q(username_id__username=username)
+
+        user_objects = (Note.objects
+                        .select_related('username_id')
+                        .filter(query_1))
+
         context = {
             "user_objects": user_objects,
-            "username": username
+            "username": username,
+            "dict": dict
             }
         return render(request, "note/all_user_notes.html", context)
 
@@ -81,12 +94,7 @@ def new_user_note(request, *args, **kwargs):
                 if "save" in request.POST:
                     filled_obj.save()
                     return redirect("get_user_notes", request.user.username)
-
-                elif "download" in request.POST:
-                    pass
-                    # pdf = make_pdf(request)
-                    # return HttpResponse(pdf, content_type="application/pdf")
-
+  
         context = {
             "form": form,
             "username": request.user.username
