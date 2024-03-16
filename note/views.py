@@ -1,4 +1,4 @@
-from socket import timeout
+from django.core.cache import cache
 from django.views.decorators.cache import cache_page
 from django.db.models import Q
 import redis
@@ -16,7 +16,7 @@ from django.contrib.auth.models import User
 from .models import Note
 
 
-r_cache = redis.Redis(host='redis', port=6379, decode_responses=True)
+# r_cache = redis.Redis(host='redis', port=6379, decode_responses=True)
 
 
 def anonymous_note(request, *args, **kwargs):
@@ -27,21 +27,16 @@ def anonymous_note(request, *args, **kwargs):
         form = AnonymousNoteForm(request.POST)
         request = add_info_in_session(form, request)
 
-        if "login" in request.POST:  # separate login and register
+        if "login" in request.POST:  
             return redirect("login")
 
-        elif "register" in request.POST:  # separate login and register
+        elif "register" in request.POST:  
             return redirect("register")
-
-        elif "download" in request.POST:
-            pass
-            # pdf = make_pdf(request)
-            # return HttpResponse(pdf, content_type="application/pdf")
 
     context = {"form": form}
     return render(request, "note/note.html", context)
 
-@cache_page(7)
+
 def get_user_notes(request, *args, **kwargs):
     # два словаря - один с ключом пользователя и значениями слагов заметок
     # второй словарь - ключ - слаг заметки, значения вся инфа из него
@@ -60,17 +55,20 @@ def get_user_notes(request, *args, **kwargs):
     #     r_cache.expire('username', 5)
     username = request.user.username
     if request.user.is_authenticated:
-        
-        query_1 = Q(username_id__username=username)
+        cache_key = username
+        user_notes = cache.get(cache_key)
 
-        user_objects = (Note.objects
-                        .select_related('username_id')
-                        .filter(query_1))
+        if not user_notes:
+            print('CACHED!!')
+            q = Q(username_id__username=username)
+            user_notes = (Note.objects
+                            .select_related('username_id')
+                            .filter(q))
+            cache.set(cache_key, user_notes, timeout=10)
 
         context = {
-            "user_objects": user_objects,
+            "user_objects": user_notes,
             "username": username,
-            "dict": dict
             }
         return render(request, "note/all_user_notes.html", context)
 
