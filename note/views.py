@@ -40,9 +40,11 @@ def get_user_notes(request, *args, **kwargs):
 
         if not user_notes:
             q = Q(username_id__username=username)
-            user_notes = (Note.objects
-                            .select_related('username_id')
-                            .filter(q))
+            user_notes = (
+                Note.objects.select_related('username_id')
+                .filter(q)
+                .order_by('-update')
+                )        
             cache.set(cache_key, user_notes, timeout=10)
 
         context = {
@@ -72,7 +74,7 @@ def new_user_note(request, *args, **kwargs):
                 if "save" in request.POST:
                     filled_obj.save()
                     return redirect("get_user_notes", request.user.username)
-  
+
         context = {
             "form": form,
             "username": request.user.username
@@ -99,11 +101,6 @@ def update_user_note(request, *args, **kwargs):
                     current_user_object.save()
                     return redirect("get_user_notes", request.user.username)
 
-                elif "download" in request.POST:
-                    pass
-                    # pdf = make_pdf(request)
-                    # return HttpResponse(pdf, content_type="application/pdf")
-
         context = {
             "form": form,
             "username": request.user.username,
@@ -113,25 +110,17 @@ def update_user_note(request, *args, **kwargs):
 
 
 def delete_user_note(request, *args, **kwargs):
+
     if request.user.is_authenticated:
-        user_id = (User.objects.get(username=kwargs['username'])).id
-        current_user_object = Note.objects.get(
-            username_id=user_id, slug=kwargs["slug"]
-        )
+
+        q1 = Q(username_id__username=kwargs['username'])
+        q2 = Q(slug=kwargs["slug"])
+
+        current_user_object = (
+            Note.objects.select_related('username_id')
+            .get(q1 & q2)
+            )
         current_user_object.delete()
-        # notes = list(cache.get(request.user.username))
 
-        # cache.delete(request.user.username)
-        return redirect("get_user_notes", request.user.username)
-
-
-# name = r_cache.hget('username', 'username')
-# age = r_cache.hget('username', 'age')
-# if name:
-#     print(name)
-#     print(age)
-# else:
-#     print('Set name')
-#     r_cache.hset('username', 'username', request.user.username)
-#     r_cache.hset('username', 'age', 30)
-#     r_cache.expire('username', 5)
+        cache.delete(kwargs['username'])
+        return redirect("get_user_notes", kwargs['username'])
