@@ -1,7 +1,5 @@
 from django.core.cache import cache
-from django.views.decorators.cache import cache_page
 from django.db.models import Q
-import redis
 from django.shortcuts import render, redirect
 from .functions import (
     prepare_data_for_form,
@@ -9,14 +7,10 @@ from .functions import (
     add_info_in_session,
     extract_data_from_object,
     add_info_in_current_object_and_session,
-    # make_pdf,
 )
 from .forms import AnonymousNoteForm, UserCreateNoteForm, UserUpdateNoteForm
 from django.contrib.auth.models import User
 from .models import Note
-
-
-# r_cache = redis.Redis(host='redis', port=6379, decode_responses=True)
 
 
 def anonymous_note(request, *args, **kwargs):
@@ -38,28 +32,13 @@ def anonymous_note(request, *args, **kwargs):
 
 
 def get_user_notes(request, *args, **kwargs):
-    # два словаря - один с ключом пользователя и значениями слагов заметок
-    # второй словарь - ключ - слаг заметки, значения вся инфа из него
-
-
-
-    # name = r_cache.hget('username', 'username')
-    # age = r_cache.hget('username', 'age')
-    # if name:
-    #     print(name)
-    #     print(age)
-    # else:
-    #     print('Set name')
-    #     r_cache.hset('username', 'username', request.user.username)
-    #     r_cache.hset('username', 'age', 30)
-    #     r_cache.expire('username', 5)
     username = request.user.username
+
     if request.user.is_authenticated:
         cache_key = username
         user_notes = cache.get(cache_key)
 
         if not user_notes:
-            print('CACHED!!')
             q = Q(username_id__username=username)
             user_notes = (Note.objects
                             .select_related('username_id')
@@ -71,7 +50,8 @@ def get_user_notes(request, *args, **kwargs):
             "username": username,
             }
         return render(request, "note/all_user_notes.html", context)
-
+    
+    return redirect('home')
 
 def new_user_note(request, *args, **kwargs):
     request.session["title"] = ""
@@ -139,4 +119,19 @@ def delete_user_note(request, *args, **kwargs):
             username_id=user_id, slug=kwargs["slug"]
         )
         current_user_object.delete()
+        # notes = list(cache.get(request.user.username))
+
+        # cache.delete(request.user.username)
         return redirect("get_user_notes", request.user.username)
+
+
+# name = r_cache.hget('username', 'username')
+# age = r_cache.hget('username', 'age')
+# if name:
+#     print(name)
+#     print(age)
+# else:
+#     print('Set name')
+#     r_cache.hset('username', 'username', request.user.username)
+#     r_cache.hset('username', 'age', 30)
+#     r_cache.expire('username', 5)

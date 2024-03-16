@@ -1,5 +1,6 @@
 {% extends 'note/base.html' %} 
-{% load static %} 
+{% load static %}
+{% load cache %} 
 
 
 {% block title %}
@@ -7,12 +8,16 @@ User notes
 {% endblock %}
 
 
-{% block content %} 
+{% block content %}
+
+
 
 <div class="body_bg layout_padding">
 </div> 
 
 <table class="table table-striped table-hover table-bordered">
+
+  {% cache 100 table_nav %} 
   <thead>
     <tr>
       <th class="font-weight-normal" scope="col">Title</th>
@@ -22,6 +27,8 @@ User notes
       <th scope="col"></th>
     </tr>
   </thead>
+  {% endcache %}
+
   <tbody>
     {% for obj in user_objects %}
     <tr>
@@ -34,6 +41,8 @@ User notes
     {% endfor %}
   </tbody>
 </table>
+
+{% cache 100 table_options %} 
 <div class="btn-box">
   <a href="{% url 'new_user_note' username=username %}" class="btn-1">
     New note
@@ -42,9 +51,8 @@ User notes
     Change password
   </a>
 </div>
-<div class="body_bg layout_padding">
-</div> 
-<div class="body_bg layout_padding">
-</div> 
+<div class="body_bg layout_padding"></div> 
+<div class="body_bg layout_padding"></div> 
+{% endcache %}
 
 {% endblock %}
