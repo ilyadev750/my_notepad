@@ -5,7 +5,6 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from django.utils.crypto import get_random_string
 from pytils.translit import slugify
-# from xhtml2pdf import pisa
 
 
 def prepare_data_for_form(request):
@@ -54,7 +53,7 @@ def add_info_in_session(form, request):
     return request
 
 
-def add_info_in_new_object_and_session(obj, form, request):
+def add_info_in_new_object(obj, form, request):
     obj.title = form.cleaned_data['title']
     obj.content = form.cleaned_data['content']
     obj.create = form.cleaned_data['create']
@@ -79,21 +78,3 @@ def add_info_in_current_object_and_session(obj, form, request):
     return obj, request
 
 
-# def render_to_pdf(template_src, context={}):
-#     template = get_template(template_src)
-#     html = template.render(context)
-#     result = BytesIO()
-#     pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")),
-#                                  dest=result)
-#     if not pdf.err:
-#         return HttpResponse(result.getvalue(), content_type='application/pdf')
-#     return HttpResponse('Errors')
-
-
-# def make_pdf(request):
-#     context = {
-#         'title': request.session['title'],
-#         'content': request.session['content']
-#         }
-#     pdf = render_to_pdf('user_note.html', context)
-#     return pdf

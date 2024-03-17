@@ -1,9 +1,12 @@
 {% extends "users/base.html" %}
 {% load static %} 
+{% load cache %} 
 
 {% block title %} Registration {% endblock %}
 
 {% block content %}
+
+{% cache 100 registration %}
 
 <div class="body_bg layout_padding">
   <section class="contact_section">
@@ -35,6 +38,8 @@
 </div>
 <div class="body_bg layout_padding">
 </div> 
+
+{% endcache %}
 
 {% endblock %}
 

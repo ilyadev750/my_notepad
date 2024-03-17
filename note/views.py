@@ -1,9 +1,10 @@
 from django.core.cache import cache
+from .tasks import create_new_note
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from .functions import (
     prepare_data_for_form,
-    add_info_in_new_object_and_session,
+    add_info_in_new_object,
     add_info_in_session,
     extract_data_from_object,
     add_info_in_current_object_and_session,
@@ -19,13 +20,13 @@ def anonymous_note(request, *args, **kwargs):
 
     if request.method == "POST":
         form = AnonymousNoteForm(request.POST)
-        request = add_info_in_session(form, request)
+        # request = add_info_in_session(form, request)
 
         if "login" in request.POST:  
             return redirect("login")
 
         elif "register" in request.POST:  
-            return redirect("register")
+            return redirect("registration")
 
     context = {"form": form}
     return render(request, "note/note.html", context)
@@ -52,12 +53,12 @@ def get_user_notes(request, *args, **kwargs):
             "username": username,
             }
         return render(request, "note/all_user_notes.html", context)
-    
+
     return redirect('home')
 
 def new_user_note(request, *args, **kwargs):
-    request.session["title"] = ""
-    request.session["content"] = ""
+    # request.session["title"] = ""
+    # request.session["content"] = ""
 
     if request.user.is_authenticated:
         data = prepare_data_for_form(request)
@@ -65,20 +66,22 @@ def new_user_note(request, *args, **kwargs):
 
         if request.method == "POST":
             form = UserCreateNoteForm(request.POST)
-            empty_obj = Note()
+            # empty_obj = Note()
             if form.is_valid():
-                filled_obj, request = add_info_in_new_object_and_session(
-                    empty_obj, form, request
-                )
+                create_new_note.delay()
+                # filled_obj, request = add_info_in_new_object(
+                #     empty_obj, form, request
+                # )
 
-                if "save" in request.POST:
-                    filled_obj.save()
-                    return redirect("get_user_notes", request.user.username)
+                # if "save" in request.POST:
+                #     filled_obj.save()
+                #     return redirect("get_user_notes", request.user.username)
 
         context = {
             "form": form,
             "username": request.user.username
             }
+        
         return render(request, "note/note.html", context)
 
 

@@ -1,5 +1,6 @@
 {% extends "note/base.html" %}
 {% load static %} 
+{% load cache %} 
 
 {% block title %} Note {% endblock %}
 
@@ -37,7 +38,6 @@
       </form>
     </div>
   </section>
-  
 </div>
 
 {% endblock %}

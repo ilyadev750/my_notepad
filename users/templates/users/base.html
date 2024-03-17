@@ -1,8 +1,10 @@
 {% load static %}
+{% load cache %} 
 
 <!DOCTYPE html>
 <html>
 
+{% cache 5000 head %}
 <head>
   <!-- Basic -->
   <meta charset="utf-8" />
@@ -35,7 +37,12 @@
   <link href={% static "css/responsive.css" %} rel="stylesheet" />
 </head>
 
+{% endcache %}
+
 <body class="sub_page">
+
+  {% cache 100 sidebar note %}
+
   <div class="hero_area">
     <!-- header section strats -->
     <header class="header_section">
@@ -60,6 +67,11 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'about' %}"> About </a>
                 </li>
+
+  {% endcache %}
+
+  {% cache 100 sidebar user %}              
+
                 {% if user.is_authenticated %}
                   <li class="nav-item">
                     <a class="nav-link" href="{% url 'get_user_notes' username=user.username %}"> {{ user.username }} </a>
@@ -82,12 +94,15 @@
       </div>
     </header>
     <!-- end header section -->
-
+  {% endcache %}
   </div>
 
   {% block content %}
 
   {% endblock %}
+
+  {% cache 5000 footer %}
+
   <div class="body_bg layout_padding">
   </div> 
 
@@ -97,7 +112,7 @@
     </p>
   </section>
 
-
+  {% endcache %}
 
   <script type="text/javascript" src={% static "js/jquery-3.4.1.min.js" %}></script>
   <script type="text/javascript" src={% static "js/bootstrap.js" %}></script>
