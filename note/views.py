@@ -1,5 +1,6 @@
 from django.core.cache import cache
-from .tasks import create_new_note
+from .tasks import create_new_note, update_current_note
+from django.urls import reverse
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from .functions import (
@@ -7,7 +8,7 @@ from .functions import (
     add_info_in_new_object,
     add_info_in_session,
     extract_data_from_object,
-    add_info_in_current_object_and_session,
+    add_info_in_current_object,
 )
 from .forms import AnonymousNoteForm, UserCreateNoteForm, UserUpdateNoteForm
 from django.contrib.auth.models import User
@@ -56,28 +57,17 @@ def get_user_notes(request, *args, **kwargs):
 
     return redirect('home')
 
-def new_user_note(request, *args, **kwargs):
-    # request.session["title"] = ""
-    # request.session["content"] = ""
 
+def new_user_note(request, *args, **kwargs):
     if request.user.is_authenticated:
         data = prepare_data_for_form(request)
         form = UserCreateNoteForm(data)
 
         if request.method == "POST":
             form = UserCreateNoteForm(request.POST)
-            # empty_obj = Note()
             if form.is_valid():
                 create_new_note.delay(form.cleaned_data, request.user.username)
-                return redirect('home')
-                # return redirect("get_user_notes", request.user.username)
-                # filled_obj, request = add_info_in_new_object(
-                #     empty_obj, form, request
-                # )
-
-                # if "save" in request.POST:
-                #     filled_obj.save()
-                #     return redirect("get_user_notes", request.user.username)
+                return redirect('success', 'created')
 
         context = {
             "form": form,
@@ -88,34 +78,38 @@ def new_user_note(request, *args, **kwargs):
 
 
 def update_user_note(request, *args, **kwargs):
+    username = request.user.username
+
     if request.user.is_authenticated:
-        user_id = (User.objects.get(username=kwargs['username'])).id
-        current_user_object = Note.objects.get(
-            username_id=user_id, slug=kwargs["slug"]
-        )
+        current_user_object = cache.get(kwargs["slug"])
+        if not current_user_object:
+            q1 = Q(username_id__username=username)
+            q2 = Q(slug=kwargs["slug"])
+            current_user_object = (
+                Note.objects.select_related('username_id')
+                .get(q1 & q2)
+                )
+            cache.set(kwargs["slug"], current_user_object, timeout=100)
+
         data = extract_data_from_object(current_user_object)
         form = UserUpdateNoteForm(data)
+        
         if request.method == "POST":
             form = UserUpdateNoteForm(request.POST)
             if form.is_valid():
-                current_user_object, request = add_info_in_current_object_and_session(
-                    current_user_object, form, request
-                )
-                
-                if "save" in request.POST:
-                    current_user_object.save()
-                    return redirect("get_user_notes", request.user.username)
+                update_current_note.delay(form.cleaned_data, kwargs["slug"])
+                return redirect('success', 'updated')
 
         context = {
             "form": form,
             "username": request.user.username,
             "slug": current_user_object.slug
             }
+        
         return render(request, "note/note.html", context)
 
 
 def delete_user_note(request, *args, **kwargs):
-
     if request.user.is_authenticated:
 
         q1 = Q(username_id__username=kwargs['username'])
@@ -129,3 +123,20 @@ def delete_user_note(request, *args, **kwargs):
 
         cache.delete(kwargs['username'])
         return redirect("get_user_notes", kwargs['username'])
+
+
+def success(request, message):
+    get_user_notes = reverse("get_user_notes", args=[request.user.username])
+
+    if message == 'created':
+        message = 'New note is created!'
+
+    elif message == 'updated':
+        message = 'Chosen note is updated!'
+
+    context = {
+        'get_user_notes': get_user_notes,
+        'message': message
+        }
+    
+    return render(request, 'note/success.html', context)

@@ -1,0 +1,43 @@
+{% extends "users/base.html" %}
+{% load static %} 
+{% load cache %} 
+
+{% block title %} Success {% endblock %}
+
+{% block content %}
+
+{% cache 100 success new %}
+
+<div class="body_bg layout_padding">
+  <section class="contact_section">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          Success
+        </h2>
+      </div>
+    </div>
+    <div class="my-container contact_bg layout_padding2-top">
+      <div class="col align-self-center">
+        <div class="contact_form">
+          <p class="create-user">{{ message }}</p>
+          <p class="create-user">
+            <span>
+              <a class="create-user-link" href="{{ get_user_notes }}">
+                Return to the note list
+              </a>
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="body_bg layout_padding">
+  </div> 
+  
+</div>
+
+{% endcache %}
+
+{% endblock %}
+

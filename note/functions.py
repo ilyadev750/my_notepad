@@ -61,27 +61,26 @@ def add_info_in_new_object(obj, cleaned_data, username):
     obj.username_id = User.objects.get(username=username)
     obj.slug = slugify(obj.title) + get_random_string(length=8)
     return obj
-    # obj.title = form.cleaned_data['title']
-    # obj.content = form.cleaned_data['content']
-    # obj.create = form.cleaned_data['create']
-    # obj.update = form.cleaned_data['update']
-    # obj.username_id = User.objects.get(username=request.user.username)
-    # obj.slug = slugify(obj.title) + get_random_string(length=8)
-    # request.session['title'] = obj.title
-    # request.session['content'] = obj.content
-    # return obj, request
 
 
-def add_info_in_current_object_and_session(obj, form, request):
-    if obj.title == form.cleaned_data['title']:
-        obj.title = form.cleaned_data['title']
-    else:
-        obj.title = form.cleaned_data['title']
+def add_info_in_current_object(obj, cleaned_data):
+    if obj.title != cleaned_data['title']:
+        obj.title = cleaned_data['title']
         obj.slug = slugify(obj.title) + get_random_string(length=8)
-    obj.content = form.cleaned_data['content']
-    obj.update = form.cleaned_data['update']
-    request.session['title'] = obj.title
-    request.session['content'] = obj.content
-    return obj, request
+    obj.content = cleaned_data['content']
+    obj.update = cleaned_data['update']
+    return obj
+
+# def add_info_in_current_object(obj, form, request):
+#     if obj.title == form.cleaned_data['title']:
+#         obj.title = form.cleaned_data['title']
+#     else:
+#         obj.title = form.cleaned_data['title']
+#         obj.slug = slugify(obj.title) + get_random_string(length=8)
+#     obj.content = form.cleaned_data['content']
+#     obj.update = form.cleaned_data['update']
+#     request.session['title'] = obj.title
+#     request.session['content'] = obj.content
+#     return obj, request
 
 
