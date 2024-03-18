@@ -1,5 +1,3 @@
-from distutils.command import clean
-from django.shortcuts import redirect
 from django.core.cache import cache
 from .models import Note
 from .functions import add_info_in_new_object, add_info_in_current_object
@@ -17,9 +15,9 @@ def create_new_note(cleaned_data, username):
 
 
 @shared_task
-def update_current_note(cleaned_data, slug):
+def update_current_note(cleaned_data, username, slug):
     old_obj = cache.get(slug)
     new_obj = add_info_in_current_object(old_obj, cleaned_data)
     cache.delete(slug)
+    cache.delete(username)
     new_obj.save()
-    

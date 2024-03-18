@@ -9,6 +9,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from .forms import (CustomUserCreationForm, UserForgotPasswordForm,
                     UserSetNewPasswordForm)
+from django.core.cache import cache
 
 
 class UserForgotPasswordView(SuccessMessageMixin, PasswordResetView):
@@ -18,7 +19,7 @@ class UserForgotPasswordView(SuccessMessageMixin, PasswordResetView):
     success_message = 'Mail with instructions sent to your email!'
     subject_template_name = 'users/password_subject_reset_mail.txt'
     email_template_name = 'users/password_reset_mail.html'
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Request to the new password'
@@ -32,7 +33,7 @@ class UserPasswordResetConfirmView(SuccessMessageMixin,
     success_url = reverse_lazy('password_reset_complete')
     success_message = 'Your password was sucessfully changed. \
                       Return to the website.'
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Set the new password:'
@@ -44,7 +45,7 @@ class UserPasswordChangeView(SuccessMessageMixin, PasswordChangeView):
     form_class = UserSetNewPasswordForm
     template_name = 'users/password_set_new.html'
     success_message = 'Your password was sucessfully changed!'
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Set the new password:'
@@ -92,5 +93,6 @@ def login_user(request, *args, **kwargs):
 
 
 def logout_user(request, *args, **kwargs):
+    cache.clear()
     logout(request)
     return redirect("home")

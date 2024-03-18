@@ -1,6 +1,5 @@
-from io import BytesIO
-from django.http import HttpResponse
-from django.template.loader import get_template
+from django.db.models import Q
+from .models import Note
 from datetime import datetime
 from django.contrib.auth.models import User
 from django.utils.crypto import get_random_string
@@ -31,7 +30,7 @@ def extract_data_from_object(obj):
 def extract_data_from_session(request, key):
     try:
         value = request.session[key]
-    except:
+    except KeyError:
         value = ''
     return value
 
@@ -39,7 +38,7 @@ def extract_data_from_session(request, key):
 def extract_data_from_form(form, key):
     try:
         value = form.cleaned_data[key]
-    except:
+    except KeyError:
         value = ''
     return value
 
@@ -71,16 +70,17 @@ def add_info_in_current_object(obj, cleaned_data):
     obj.update = cleaned_data['update']
     return obj
 
-# def add_info_in_current_object(obj, form, request):
-#     if obj.title == form.cleaned_data['title']:
-#         obj.title = form.cleaned_data['title']
-#     else:
-#         obj.title = form.cleaned_data['title']
-#         obj.slug = slugify(obj.title) + get_random_string(length=8)
-#     obj.content = form.cleaned_data['content']
-#     obj.update = form.cleaned_data['update']
-#     request.session['title'] = obj.title
-#     request.session['content'] = obj.content
-#     return obj, request
+
+def get_queryset_from_db(username, slug):
+    q1 = Q(username_id__username=username)
+    q2 = Q(slug=slug)
+    current_note_object = (
+        Note.objects.select_related('username_id')
+        .filter(q1 & q2)
+        )
+    return current_note_object
 
 
+def reset_session(request):
+    request.session['title'] = ''
+    request.session['content'] = ''
