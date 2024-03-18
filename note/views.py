@@ -68,7 +68,9 @@ def new_user_note(request, *args, **kwargs):
             form = UserCreateNoteForm(request.POST)
             # empty_obj = Note()
             if form.is_valid():
-                create_new_note.delay()
+                create_new_note.delay(form.cleaned_data, request.user.username)
+                return redirect('home')
+                # return redirect("get_user_notes", request.user.username)
                 # filled_obj, request = add_info_in_new_object(
                 #     empty_obj, form, request
                 # )

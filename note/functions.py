@@ -53,16 +53,23 @@ def add_info_in_session(form, request):
     return request
 
 
-def add_info_in_new_object(obj, form, request):
-    obj.title = form.cleaned_data['title']
-    obj.content = form.cleaned_data['content']
-    obj.create = form.cleaned_data['create']
-    obj.update = form.cleaned_data['update']
-    obj.username_id = User.objects.get(username=request.user.username)
+def add_info_in_new_object(obj, cleaned_data, username):
+    obj.title = cleaned_data['title']
+    obj.content = cleaned_data['content']
+    obj.create = cleaned_data['create']
+    obj.update = cleaned_data['update']
+    obj.username_id = User.objects.get(username=username)
     obj.slug = slugify(obj.title) + get_random_string(length=8)
-    request.session['title'] = obj.title
-    request.session['content'] = obj.content
-    return obj, request
+    return obj
+    # obj.title = form.cleaned_data['title']
+    # obj.content = form.cleaned_data['content']
+    # obj.create = form.cleaned_data['create']
+    # obj.update = form.cleaned_data['update']
+    # obj.username_id = User.objects.get(username=request.user.username)
+    # obj.slug = slugify(obj.title) + get_random_string(length=8)
+    # request.session['title'] = obj.title
+    # request.session['content'] = obj.content
+    # return obj, request
 
 
 def add_info_in_current_object_and_session(obj, form, request):
