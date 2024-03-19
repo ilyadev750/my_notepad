@@ -112,12 +112,12 @@
       <div class="container contact_bg layout_padding2-top">
         <div class="row">
           <div class="col-md-6">
-            <div class="contact_form ">
-              <form action="">
-                <input type="text" placeholder="Name ">
-                <input type="email" placeholder="Email">
-                <input type="text" placeholder="Message" class="message_input">
-                <button>
+            <div class="contact_form">
+              <form action="{% url 'send_mail' %}" method="get">
+                <input type="text" name="name" placeholder="Name ">
+                <input type="email" name="email" placeholder="Email">
+                <input type="text" name="message" placeholder="Message" class="message_input">
+                <button type="submit" name="send">
                   Send
                 </button>
               </form>

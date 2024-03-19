@@ -6,7 +6,7 @@ from django.contrib.auth.forms import (UserCreationForm,
 from django.contrib.auth.forms import (PasswordResetForm
                                        as PasswordResetFormCore)
 from django.core.exceptions import ValidationError
-from .tasks import send_mail
+from .tasks import send_link
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -61,7 +61,7 @@ class UserForgotPasswordForm(PasswordResetFormCore):
                   from_email, to_email, html_email_template_name=None):
         context['user'] = context['user'].id
 
-        send_mail.delay(
+        send_link.delay(
             subject_template_name=subject_template_name,
             email_template_name=email_template_name,
             context=context, from_email=from_email, to_email=to_email,
