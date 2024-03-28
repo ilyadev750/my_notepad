@@ -3,12 +3,12 @@
 </p>
 
 <p align="center">
-  <img alt="Static Badge" src="https://img.shields.io/badge/Python-3.11-blue">
+  <img alt="Static Badge" src="https://img.shields.io/badge/Python-3.9-blue">
   <img alt="Static Badge" src="https://img.shields.io/badge/Django-4.2-purple">
-  <img alt="Static Badge" src="https://img.shields.io/badge/SQLite-green">
+  <img alt="Static Badge" src="https://img.shields.io/badge/PostgreSQL-15.4-green">
   <img alt="Static Badge" src="https://img.shields.io/badge/ckeditor-pink">
-  <img alt="Static Badge" src="https://img.shields.io/badge/HTML-red">
-  <img alt="Static Badge" src="https://img.shields.io/badge/CSS-DAAB29">
+  <img alt="Static Badge" src="https://img.shields.io/badge/redis-red">
+  <img alt="Static Badge" src="https://img.shields.io/badge/celery-DAAB29">
 </p>
 
 ## About
@@ -17,16 +17,14 @@ Django application "Notepad-online" is created for making notes and downloading 
 
 ## Key features:
 
-- registration and authentication system
-- user can make notes anonymously
-- ability to restore and change password
-- Yandex SMTP-server forwards email messages
-- CRUD operations with notes
-- custom text editor with next features: changing fonts and sizes, adding images, changing text color and alignment, adding special characters, printing a note, etc.
+- user registration and authentication are implemented 
+- Yandex mail server sends the user a letter to reset and change the password
+- operations for sending letters, creating and changing notes are implemented through the Celery library, which allows to process a large number of requests
+- data about notes and templates are cached in Redis, which reduces the load on the PostgreSQL database and greatly speeds up the transfer of data to the user
+- implemented a text editor with functionality for changing text parameters, downloading and printing notes in PDF format
+- the entire project is deployed in Docker containers using Docker Compose
 
-## It's planned to add:
+## In future:
 
-- PostgreSQL database
-- Redis for caching
-- Celery task manager
-- Docker containers
+- write tests for the project
+- deploy the project on the remote server
