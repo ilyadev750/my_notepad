@@ -24,6 +24,14 @@ Django application "Notepad-online" is created for making notes and downloading 
 - implemented a text editor with functionality for changing text parameters, downloading and printing notes in PDF format
 - the entire project is deployed in Docker containers using Docker Compose
 
+## Screenshots:
+<p align="center">
+  <img src="note/static/images/scr1.png"/>
+</p>
+<p align="center">
+  <img src="note/static/images/scr2.png"/>
+</p>
+
 ## In future:
 
 - write tests for the project
