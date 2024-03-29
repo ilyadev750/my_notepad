@@ -53,7 +53,7 @@ def get_user_notes(request, *args, **kwargs):
             "username": username,
             }
         return render(request, "note/all_user_notes.html", context)
-
+    
     return redirect('home')
 
 
