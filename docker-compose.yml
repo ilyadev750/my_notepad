@@ -13,17 +13,14 @@ services:
     build: 
       context: .
       no_cache: true
-    # command: python manage.py runserver 0.0.0.0:8000
     command: gunicorn my_notepad.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - .:/usr/src/app/
       - static_files:/usr/src/app/static
     env_file:
       - ./.env
-    expose:
-      - 8001
-    # ports:
-    #   - 8001:8000
+    ports:
+      - 8000:8000
     depends_on:
       - redis
       - db
@@ -34,7 +31,7 @@ services:
     ports:
       - 80:80
     volumes:
-      - static_files:/home/notepad/static_files
+      - static_files:/home/notepad/staticfiles
     depends_on:
       - django
 
