@@ -13,16 +13,30 @@ services:
     build: 
       context: .
       no_cache: true
-    command: python manage.py runserver 0.0.0.0:8000
+    # command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn my_notepad.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - .:/usr/src/app/
+      - static_files:/usr/src/app/static
     env_file:
       - ./.env
-    ports:
-      - 8001:8000
+    expose:
+      - 8001
+    # ports:
+    #   - 8001:8000
     depends_on:
       - redis
       - db
+
+  nginx:
+    build: 
+      context: ./nginx/
+    ports:
+      - 80:80
+    volumes:
+      - static_files:/home/notepad/static_files
+    depends_on:
+      - django
 
   celery:
     container_name: celery
@@ -49,4 +63,6 @@ services:
     volumes:
       - /Users/ilyapetrov/notepad_db:/var/lib/postgresql/data  
 
+volumes:
+  static_files:
     
