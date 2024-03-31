@@ -13,14 +13,14 @@ services:
     build: 
       context: .
       no_cache: true
-    command: gunicorn my_notepad.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn my_notepad.wsgi:application --bind 0.0.0.0:8080
     volumes:
       - .:/usr/src/app/
       - static_files:/usr/src/app/static
     env_file:
       - ./.env
-    ports:
-      - 8000:8000
+    expose:
+      - 8080
     depends_on:
       - redis
       - db
@@ -58,7 +58,13 @@ services:
     env_file:
       - ./.env
     volumes:
-      - /Users/ilyapetrov/notepad_db:/var/lib/postgresql/data  
+      - /Users/ilyapetrov/notepad_db:/var/lib/postgresql/data
+
+  my_website:
+    image: website
+    container_name: website
+    ports:
+      - 82:80
 
 volumes:
   static_files:
