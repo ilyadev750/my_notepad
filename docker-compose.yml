@@ -61,12 +61,6 @@ services:
     volumes:
       - /Users/ilyapetrov/notepad_db:/var/lib/postgresql/data
 
-  my_website:
-    image: website
-    container_name: website
-    ports:
-      - 82:80
-
 volumes:
   static_files:
     
