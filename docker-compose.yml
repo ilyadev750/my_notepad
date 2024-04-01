@@ -32,6 +32,8 @@ services:
       - 443:443
     volumes:
       - static_files:/home/notepad/staticfiles
+      - /etc/letsencrypt:/etc/letsencrypt
+
     depends_on:
       - django
 
