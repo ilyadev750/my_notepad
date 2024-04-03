@@ -36,7 +36,3 @@ Django application "Notepad-online" is created for making notes and downloading 
 <p align="center">
   <img src="static/images/notepad_tests.png"/>
 </p>
-
-## In future:
-
-- deploy the project on the remote server
